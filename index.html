@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title id="page-title">Laundry Kiloan – Layanan Laundry & Express Terpercaya</title>
+  <meta name="description" id="page-desc" content="Jasa laundry kiloan & express terpercaya. Bersih, wangi, rapi mulai Rp 7.000/kg. Melayani antar jemput ke berbagai kecamatan.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" id="page-canonical" href="https://laundrykiloan.net/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" id="og-title" content="Laundry Kiloan – Laundry Kiloan & Express">
+  <meta property="og:description" id="og-desc" content="Jasa laundry kiloan dan express terpercaya. Mulai Rp 7.000/kg, hasil bersih, wangi, dan rapi.">
+  <meta property="og:url" id="og-url" content="https://laundrykiloan.net/">
+  <meta property="og:locale" content="id_ID">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json" id="schema-json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Laundry Kiloan",
+    "telephone": "+6285137396984",
+    "priceRange": "Rp 7.000 - Rp 12.000/kg",
+    "url": "https://laundrykiloan.net/"
+  }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #1E40AF;       /* Royal Blue */
+      --primary-dk: #1E3A8A;    /* Dark Royal Blue */
+      --primary-lt: #EFF6FF;    /* Light Royal Tint */
+      --orange: #EA580C;        /* Vivid Orange */
+      --orange-dk: #C2410C;     /* Deep Orange */
+      --orange-lt: #FFF7ED;     /* Light Orange Tint */
+      --dark: #0F172A;          /* Charcoal Black */
+      --gray: #475569;          /* Slate Gray */
+      --lgray: #94A3B8;         /* Light Slate */
+      --border: #E2E8F0;        /* Subtle Border */
+      --bg: #F8FAFC;            /* Off-white background */
+      --white: #FFFFFF;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow: 0 4px 20px rgba(30, 64, 175, 0.08);
+      --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.12);
+      --wa: #25D366;
+      --wa-dk: #1EBE5D;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Plus Jakarta Sans", sans-serif; color: var(--dark); background: var(--bg); line-height: 1.7; }
+    h1, h2, h3, h4 { font-family: "Bricolage Grotesque", sans-serif; line-height: 1.25; }
+    a { color: var(--primary); text-decoration: none; cursor: pointer; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    .container { max-width: 1120px; width: 100%; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 68px 0; }
+    .section-alt { background: var(--white); }
+
+    /* Badges & Headers */
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--primary-lt); color: var(--primary);
+      font-size: .8rem; font-weight: 700; padding: 6px 16px;
+      border-radius: 99px; text-transform: uppercase; letter-spacing: .05em;
+      margin-bottom: 14px;
+    }
+    .badge-orange { background: var(--orange-lt); color: var(--orange); }
+    .section-head { text-align: center; max-width: 640px; margin: 0 auto 36px; }
+    .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 12px; color: var(--dark); }
+    .section-head p { font-size: .98rem; color: var(--gray); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      font-family: inherit; font-weight: 700; font-size: .95rem;
+      padding: 13px 26px; border-radius: var(--radius);
+      border: none; cursor: pointer; transition: all .2s ease;
+    }
+    .btn-wa { background: var(--wa); color: #fff; box-shadow: 0 4px 16px rgba(37, 211, 102, .3); }
+    .btn-wa:hover { background: var(--wa-dk); transform: translateY(-2px); }
+    .btn-orange { background: var(--orange); color: #fff; box-shadow: 0 4px 16px rgba(234, 88, 12, .3); }
+    .btn-orange:hover { background: var(--orange-dk); transform: translateY(-2px); }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 16px rgba(30, 64, 175, .25); }
+    .btn-primary:hover { background: var(--primary-dk); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4); }
+    .btn-outline:hover { background: rgba(255,255,255,.1); }
+    .btn-lg { padding: 16px 34px; font-size: 1.05rem; }
+
+    /* Header */
+    #site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.98); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .logo { font-family: "Bricolage Grotesque", sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+    .logo-icon { width: 38px; height: 38px; background: var(--primary); color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .header-cta { background: var(--orange); color: #fff; padding: 10px 20px; border-radius: var(--radius); font-weight: 700; font-size: .88rem; display: flex; align-items: center; gap: 8px; transition: .2s; }
+    .header-cta:hover { background: var(--orange-dk); }
+
+    /* Breadcrumbs */
+    .breadcrumb-wrap { background: #fff; border-bottom: 1px solid var(--border); padding: 10px 0; font-size: .84rem; }
+    .breadcrumb a { color: var(--primary); font-weight: 600; }
+    .breadcrumb span { margin: 0 8px; color: var(--lgray); }
+
+    /* Hero Component */
+    #hero {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--primary-dk) 60%, var(--primary) 100%);
+      color: #fff; padding: 76px 0 68px; position: relative; overflow: hidden;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .hero-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
+    .hero-title .hl-orange { color: #FDBA74; }
+    .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,.85); margin-bottom: 28px; max-width: 520px; }
+    .hero-cta-group { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-card-visual {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-lg); padding: 32px; backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-lg); text-align: center;
+    }
+
+    /* Stats Component */
+    #stats { padding: 36px 0; background: var(--white); border-top: 4px solid var(--orange); border-bottom: 1px solid var(--border); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .stat-item { text-align: center; border-right: 1px solid var(--border); padding: 10px; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: "Bricolage Grotesque", sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: .84rem; color: var(--gray); font-weight: 600; }
+
+    /* Grid Selection Cards (Kabupaten / Kecamatan) */
+    .listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+    .listing-card {
+      display: flex; align-items: center; gap: 14px; padding: 16px 18px;
+      background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius);
+      transition: all .2s ease; color: var(--dark);
+    }
+    .listing-card:hover { border-color: var(--primary); background: var(--primary-lt); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .listing-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--primary-lt); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .listing-name { font-weight: 700; font-size: .95rem; color: var(--dark); }
+    .listing-sub { font-size: .78rem; color: var(--gray); margin-top: 2px; }
+
+    /* Intro Component */
+    .unique-intro-wrap { background: var(--primary-lt); border-left: 5px solid var(--primary); border-radius: var(--radius); padding: 30px; margin-bottom: 40px; }
+    .unique-intro-title { font-size: 1.25rem; font-weight: 800; color: var(--primary-dk); margin-bottom: 10px; }
+    .unique-intro-text { font-size: .96rem; color: var(--gray); line-height: 1.8; margin-bottom: 12px; }
+
+    /* Services Grid */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .service-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow); transition: .25s; display: flex; flex-direction: column; }
+    .service-card:hover { transform: translateY(-4px); border-color: var(--orange); }
+    .service-card h3 { font-size: 1.1rem; font-weight: 700; margin: 14px 0 8px; }
+    .service-card p { font-size: .88rem; color: var(--gray); margin-bottom: 16px; flex: 1; }
+    .service-price { font-weight: 800; color: var(--orange); font-size: 1.05rem; }
+
+    /* Pricing Grid */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
+    .price-card { background: var(--white); border-radius: var(--radius-lg); padding: 30px 24px; border: 2px solid var(--border); text-align: center; position: relative; }
+    .price-card.featured { border-color: var(--orange); background: var(--orange-lt); box-shadow: var(--shadow-lg); }
+    .price-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--orange); color: #fff; font-size: .75rem; font-weight: 800; padding: 4px 16px; border-radius: 99px; }
+    .price-amount { font-family: "Bricolage Grotesque", sans-serif; font-size: 2.3rem; font-weight: 800; color: var(--primary); margin: 12px 0 4px; }
+    .price-features { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 8px; margin: 20px 0; font-size: .88rem; color: var(--gray); }
+    .price-features li::before { content: "✓"; color: var(--orange); font-weight: 800; margin-right: 8px; }
+
+    /* Steps / Cara Kerja */
+    .steps-wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 30px; }
+    .step-item { text-align: center; background: var(--white); padding: 24px 18px; border-radius: var(--radius); border: 1px solid var(--border); }
+    .step-num { width: 50px; height: 50px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+
+    /* Testimoni */
+    .testi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .testi-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 24px; position: relative; }
+    .testi-text { font-size: .9rem; color: var(--gray); font-style: italic; margin-bottom: 16px; }
+    .testi-name { font-weight: 700; font-size: .92rem; color: var(--dark); }
+    .testi-meta { font-size: .78rem; color: var(--lgray); }
+
+    /* Desa / Jangkauan Tags */
+    .coverage-box { background: var(--primary-lt); border: 2px solid var(--primary); border-radius: var(--radius-lg); padding: 26px; }
+    .desa-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .desa-tag { background: var(--white); border: 1.5px solid var(--primary); color: var(--primary); padding: 7px 16px; border-radius: 99px; font-size: .84rem; font-weight: 700; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 800px; margin: 0 auto; }
+    .faq-item { border: 1.5px solid var(--border); border-radius: var(--radius); background: var(--white); overflow: hidden; }
+    .faq-q { padding: 16px 20px; font-weight: 700; font-size: .96rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-a { display: none; padding: 0 20px 18px; font-size: .9rem; color: var(--gray); line-height: 1.7; border-top: 1px solid var(--border); margin-top: 8px; padding-top: 14px; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* CTA Bottom */
+    #final-cta { background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%); color: #fff; padding: 70px 0; text-align: center; }
+    #final-cta h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 12px; }
+    #final-cta p { font-size: 1.05rem; opacity: .9; margin-bottom: 28px; max-width: 540px; margin-left: auto; margin-right: auto; }
+
+    /* Floating WhatsApp */
+    #wa-float { position: fixed; bottom: 26px; right: 26px; z-index: 999; }
+    .wa-float-btn { width: 58px; height: 58px; border-radius: 50%; background: var(--wa); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(37, 211, 102, .5); transition: .2s; }
+    .wa-float-btn:hover { transform: scale(1.08); }
+
+    /* Footer */
+    footer { background: var(--dark); color: rgba(255,255,255,.7); padding: 48px 0 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+    .footer-inner h3 { color: #fff; font-size: .95rem; margin-bottom: 12px; }
+    .footer-inner ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-inner ul a { color: rgba(255,255,255,.7); font-size: .86rem; }
+    .footer-inner ul a:hover { color: #fff; text-decoration: underline; }
+    .footer-copy { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: .82rem; }
+
+    @media (max-width: 768px) {
+      .hero-grid, .pricing-grid, .steps-wrap, .footer-inner { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat-item:nth-child(2) { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo" onclick="navigate(event, '/')">
+          <div class="logo-icon">🧺</div> Laundry Kiloan
+        </a>
+        <a href="https://wa.me/6285137396984?text=Halo%20Laundry%20Kiloan%2C%20saya%20mau%20order" target="_blank" rel="noopener" class="header-cta">
+          💬 Pesan via WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dynamic Content Injected Here -->
+  <main id="app"></main>
+
+  <!-- Floating WhatsApp -->
+  <div id="wa-float">
+    <a id="wa-float-link" href="https://wa.me/6285137396984?text=Halo%20Laundry%20Kiloan" target="_blank" rel="noopener" class="wa-float-btn" aria-label="WhatsApp">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.552 4.116 1.52 5.849L.057 23.881a.5.5 0 00.611.611l6.032-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.948 0-3.773-.527-5.335-1.444l-.381-.228-3.949.958.977-3.83-.25-.397A9.961 9.961 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="logo" style="color:#fff; margin-bottom: 12px;"><div class="logo-icon">🧺</div> Laundry Kiloan</div>
+          <p style="font-size: .88rem; line-height: 1.6;">Layanan laundry kiloan & express profesional terpercaya di Indonesia. Melayani antar jemput harian cepat, wangi, rapi, dan bergaransi.</p>
+        </div>
+        <div>
+          <h3>Area Layanan Populer</h3>
+          <ul>
+            <li><a href="/laundry-bogor" onclick="navigate(event, '/laundry-bogor')">Laundry Bogor</a></li>
+            <li><a href="/laundry-bekasi" onclick="navigate(event, '/laundry-bekasi')">Laundry Bekasi</a></li>
+            <li><a href="/laundry-tangerang" onclick="navigate(event, '/laundry-tangerang')">Laundry Tangerang</a></li>
+            <li><a href="/laundry-bandung" onclick="navigate(event, '/laundry-bandung')">Laundry Bandung</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Layanan Kami</h3>
+          <ul>
+            <li><a href="https://wa.me/6285137396984" target="_blank">Laundry Kiloan Reguler</a></li>
+            <li><a href="https://wa.me/6285137396984" target="_blank">Laundry Express 6 Jam</a></li>
+            <li><a href="https://wa.me/6285137396984" target="_blank">Cuci + Setrika Uap</a></li>
+            <li><a href="https://wa.me/6285137396984" target="_blank">Laundry Seprai & Selimut</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-copy">
+        <p>&copy; 2026 Laundry Kiloan. Hak Cipta Dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DATABASE & ROUTING LOGIC -->
+  <script>
+    // Data Kabupaten & Kecamatan Beserta Daftar Kelurahan/Desa
+    const dataWilayah = {
+      "bogor": {
+        name: "Bogor",
+        slug: "laundry-bogor",
+        totalKecamatan: 40,
+        kecamatan: {
+          "cileungsi": {
+            name: "Cileungsi",
+            slug: "laundry-cileungsi-bogor",
+            desa: ["Cileungsi", "Cileungsi Kidul", "Cipenjo", "Cipeucang", "Dayeuh", "Gandoang", "Jatisari", "Limus Nunggal", "Mampir", "Mekarsari", "Pasir Angin", "Setu Sari"]
+          },
+          "gunung-putri": {
+            name: "Gunung Putri",
+            slug: "laundry-gunung-putri-bogor",
+            desa: ["Bojong Kulur", "Bojong Nangka", "Ciangsana", "Cicadas", "Cikeas Udik", "Gunung Putri", "Kragan", "Nagrak", "Tlajung Udik", "Wanaherang"]
+          },
+          "cibinong": {
+            name: "Cibinong",
+            slug: "laundry-cibinong-bogor",
+            desa: ["Cibinong", "Cirimekar", "Ciriung", "Harapan Jaya", "Karadenan", "Nanggewer", "Nanggewer Mekar", "Pabuaran", "Pabuaran Mekar", "Pakansari", "Pondok Rajeg", "Sukahati", "Tengah"]
+          },
+          "jonggol": {
+            name: "Jonggol",
+            slug: "laundry-jonggol-bogor",
+            desa: ["Balekambang", "Bendungan", "Cibodas", "Jonggol", "Singajaya", "Singasari", "Sirnagalih", "Sukagalih", "Sukajaya", "Sukamaju", "Sukamanah", "Sukanegara", "Sukasejati", "Weninggalih"]
+          },
+          "citeureup": {
+            name: "Citeureup",
+            slug: "laundry-citeureup-bogor",
+            desa: ["Citeureup", "Gunung Sari", "Hambalang", "Karang Asem Barat", "Karang Asem Timur", "Leuwinutug", "Pasir Mukti", "Puspanegara", "Puspasari", "Sanja", "Sukahati", "Tajur", "Tangkil"]
+          },
+          "bojonggede": {
+            name: "Bojonggede",
+            slug: "laundry-bojonggede-bogor",
+            desa: ["Bojong Baru", "Bojonggede", "Cimanggis", "Kedung Waringin", "Ragajaya", "Rawa Panjang", "Susukan", "Waringin Jaya"]
+          }
+        }
+      },
+      "bekasi": {
+        name: "Bekasi",
+        slug: "laundry-bekasi",
+        totalKecamatan: 23,
+        kecamatan: {
+          "tambun-selatan": {
+            name: "Tambun Selatan",
+            slug: "laundry-tambun-selatan-bekasi",
+            desa: ["Jatimulya", "Lambangjaya", "Lambangsari", "Mangunjaya", "Setiadarma", "Setiamekar", "Sumberjaya", "Tambun", "Tridaya Sakti"]
+          },
+          "cikarang-utara": {
+            name: "Cikarang Utara",
+            slug: "laundry-cikarang-utara-bekasi",
+            desa: ["Cikarang Kota", "Harjamekar", "Karangasih", "Karangbaru", "Karangraharja", "Mekarmukti", "Pasirgombong", "Simpangan", "Tanjungsari", "Waluya", "Wangunharja"]
+          }
+        }
+      },
+      "tangerang": {
+        name: "Tangerang",
+        slug: "laundry-tangerang",
+        totalKecamatan: 29,
+        kecamatan: {
+          "serpong": {
+            name: "Serpong",
+            slug: "laundry-serpong-tangerang",
+            desa: ["Buaran", "Ciater", "Cilenggang", "Lengkong Gudang", "Lengkong Gudang Timur", "Lengkong Wetan", "Rawa Buntu", "Rawa Mekar Jaya", "Serpong"]
+          }
+        }
+      },
+      "bandung": {
+        name: "Bandung",
+        slug: "laundry-bandung",
+        totalKecamatan: 31,
+        kecamatan: {
+          "coblong": {
+            name: "Coblong",
+            slug: "laundry-coblong-bandung",
+            desa: ["Cipaganti", "Dago", "Lebak Gede", "Lebak Siliwangi", "Sadang Serang", "Sekeloa"]
+          }
+        }
+      }
+    };
+
+    // Helper Link Navigation
+    function navigate(e, path) {
+      if (e) e.preventDefault();
+      window.history.pushState({}, '', path);
+      renderRoute();
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener('popstate', renderRoute);
+
+    // Dynamic SEO Updater
+    function updateSEO(title, desc, canonicalPath) {
+      document.title = title;
+      document.getElementById('page-title').innerText = title;
+      document.getElementById('page-desc').setAttribute('content', desc);
+      document.getElementById('og-title').setAttribute('content', title);
+      document.getElementById('og-desc').setAttribute('content', desc);
+      const url = "https://laundrykiloan.net" + canonicalPath;
+      document.getElementById('page-canonical').setAttribute('href', url);
+      document.getElementById('og-url').setAttribute('content', url);
+    }
+
+    // Router
+    function renderRoute() {
+      const path = window.location.pathname.replace(/\/$/, '') || '/';
+      const app = document.getElementById('app');
+
+      // 1. HALAMAN UTAMA (ROOT)
+      if (path === '/' || path === '') {
+        updateSEO(
+          "Laundry Kiloan – Laundry Kiloan & Express, Mulai Rp 7.000/kg",
+          "Laundry Kiloan adalah jasa laundry kiloan dan express terpercaya di Indonesia. Mulai Rp 7.000/kg, hasil bersih, wangi, rapi, dan antar jemput.",
+          "/"
+        );
+        app.innerHTML = renderHomePage();
+      } 
+      // 2. HALAMAN KABUPATEN ATAU KECAMATAN
+      else {
+        const cleanSlug = path.replace(/^\//, '');
+        let matchedKab = null;
+        let matchedKec = null;
+
+        // Cek Kabupaten
+        for (let kabKey in dataWilayah) {
+          if (dataWilayah[kabKey].slug === cleanSlug) {
+            matchedKab = dataWilayah[kabKey];
+            break;
+          }
+          // Cek Kecamatan
+          for (let kecKey in dataWilayah[kabKey].kecamatan) {
+            if (dataWilayah[kabKey].kecamatan[kecKey].slug === cleanSlug) {
+              matchedKab = dataWilayah[kabKey];
+              matchedKec = dataWilayah[kabKey].kecamatan[kecKey];
+              break;
+            }
+          }
+        }
+
+        if (matchedKec && matchedKab) {
+          // Render Kecamatan
+          updateSEO(
+            `Laundry Kiloan ${matchedKec.name} – Bersih & Wangi | Laundry Kiloan ${matchedKab.name}`,
+            `Laundry kiloan di ${matchedKec.name}, ${matchedKab.name}. Mulai Rp 7.000/kg, express 6 jam, antar jemput gratis, garansi cuci ulang.`,
+            `/${matchedKec.slug}`
+          );
+          app.innerHTML = renderKecamatanPage(matchedKab, matchedKec);
+        } else if (matchedKab) {
+          // Render Kabupaten
+          updateSEO(
+            `Laundry Kiloan ${matchedKab.name} – Laundry Kiloan | Antar Jemput`,
+            `Laundry kiloan terpercaya di seluruh ${matchedKab.name}. Mulai Rp 7.000/kg, express 6 jam, melayani seluruh kecamatan.`,
+            `/${matchedKab.slug}`
+          );
+          app.innerHTML = renderKabupatenPage(matchedKab);
+        } else {
+          // Fallback / 404
+          app.innerHTML = `<div class="container section" style="text-align:center;"><h2>Halaman Tidak Ditemukan</h2><p style="margin: 16px 0;">Maaf, halaman area yang Anda cari tidak tersedia.</p><a href="/" class="btn btn-primary" onclick="navigate(event, '/')">Kembali ke Beranda</a></div>`;
+        }
+      }
+
+      // Attach FAQ listeners
+      initFAQ();
+    }
+
+    // VIEW: 1. Home Page
+    function renderHomePage() {
+      const kabKeys = Object.keys(dataWilayah);
+      const kabGridHtml = kabKeys.map(key => {
+        const kab = dataWilayah[key];
+        return `
+          <a href="/${kab.slug}" class="listing-card" onclick="navigate(event, '/${kab.slug}')">
+            <div class="listing-icon">🧺</div>
+            <div>
+              <div class="listing-name">Laundry ${kab.name}</div>
+              <div class="listing-sub">${kab.totalKecamatan} kecamatan dilayani</div>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      return `
+        <section id="hero">
+          <div class="container">
+            <div class="hero-grid">
+              <div>
+                <div class="badge badge-orange">🧼 Solusi Cucian Praktis & Rapi</div>
+                <h1 class="hero-title">Jasa Laundry Kiloan &amp; Express <span class="hl-orange">Terpercaya</span></h1>
+                <p class="hero-sub">Layanan laundry profesional dengan standar higienis tinggi, detergen ramah pakaian, pemisahan warna ketat, dan gratis antar-jemput.</p>
+                <div class="hero-cta-group">
+                  <a href="https://wa.me/6285137396984?text=Halo%20Laundry%20Kiloan%2C%20saya%20mau%20order" target="_blank" class="btn btn-wa btn-lg">💬 Pesan Sekarang</a>
+                  <a href="#area-layanan" class="btn btn-outline">Pilih Lokasi ↓</a>
+                </div>
+              </div>
+              <div>
+                <div class="hero-card-visual">
+                  <div style="font-size: 3.5rem; margin-bottom: 12px;">👕✨</div>
+                  <h3 style="color:#fff; margin-bottom: 6px;">Mulai Rp 7.000 / kg</h3>
+                  <p style="color: rgba(255,255,255,.8); font-size: .9rem;">Garansi Cuci Ulang 100% Gratis</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="stats">
+          <div class="container">
+            <div class="stats-grid">
+              <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Tahun Pengalaman</div></div>
+              <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">Kabupaten / Kota</div></div>
+              <div class="stat-item"><div class="stat-num">700+</div><div class="stat-label">Kecamatan Tercover</div></div>
+              <div class="stat-item"><div class="stat-num">Rp 7.000</div><div class="stat-label">Harga Mulai /kg</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section-alt" id="area-layanan">
+          <div class="container">
+            <div class="section-head">
+              <div class="badge">🗺️ Area Layanan</div>
+              <h2>Pilih Kota / Kabupaten Anda</h2>
+              <p>Pilih kota Anda untuk menemukan layanan laundry terdekat dan area jangkauan antar-jemput.</p>
+            </div>
+            <div class="listing-grid">${kabGridHtml}</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-head">
+              <div class="badge badge-orange">🏆 Keunggulan</div>
+              <h2>Mengapa Memilih Laundry Kiloan?</h2>
+              <p>Standar layanan terbaik yang kami jaga di setiap kilogram pakaian Anda.</p>
+            </div>
+            <div class="services-grid">
+              <div class="service-card"><div class="listing-icon">✨</div><h3>Pemisahan Warna Ketat</h3><p>Pakaian putih dan berwarna dicuci terpisah agar terhindar dari risiko luntur.</p></div>
+              <div class="service-card"><div class="listing-icon">⚡</div><h3>Layanan Express Cepat</h3><p>Pilihan selesai dalam 6-12 jam jika Anda membutuhkan pakaian segera untuk dinas/acara.</p></div>
+              <div class="service-card"><div class="listing-icon">🛵</div><h3>Antar Jemput Gratis</h3><p>Tim kurir siap menjemput dan mengantar cucian langsung ke rumah atau kos Anda.</p></div>
+            </div>
+          </div>
+        </section>
+
+        ${renderFAQSection()}
+        ${renderCTASection("Cucian Menumpuk di Rumah?", "Serahkan pada kami, beres tanpa repot. Mulai Rp 7.000/kg.")}
+      `;
+    }
+
+    // VIEW: 2. Kabupaten Page
+    function renderKabupatenPage(kab) {
+      const kecKeys = Object.keys(kab.kecamatan);
+      const kecGridHtml = kecKeys.map(key => {
+        const kec = kab.kecamatan[key];
+        return `
+          <a href="/${kec.slug}" class="listing-card" onclick="navigate(event, '/${kec.slug}')">
+            <div class="listing-icon">📍</div>
+            <div>
+              <div class="listing-name">Laundry ${kec.name}</div>
+              <div class="listing-sub">${kec.desa.slice(0, 3).join(', ')}...</div>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      return `
+        <div class="breadcrumb-wrap">
+          <div class="container">
+            <div class="breadcrumb">
+              <a href="/" onclick="navigate(event, '/')">Home</a> <span>›</span>
+              <strong>Laundry ${kab.name}</strong>
+            </div>
+          </div>
+        </div>
+
+        <section id="hero">
+          <div class="container" style="text-align: center;">
+            <div class="badge badge-orange">📍 Area Kabupaten / Kota ${kab.name}</div>
+            <h1 class="hero-title" style="max-width: 750px; margin: 0 auto 16px;">Laundry Kiloan <span class="hl-orange">${kab.name}</span> – Antar Jemput Gratis</h1>
+            <p class="hero-sub" style="margin: 0 auto 28px;">Melayani ${kab.totalKecamatan} kecamatan di ${kab.name}. Bersih, harum, rapi, mulai Rp 7.000/kg.</p>
+            <a href="https://wa.me/6285137396984?text=Halo%20Laundry%20Kiloan%2C%20saya%20mau%20order%20di%20${encodeURIComponent(kab.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>
+          </div>
+        </section>
+
+        <section id="stats">
+          <div class="container">
+            <div class="stats-grid">
+              <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Tahun Melayani</div></div>
+              <div class="stat-item"><div class="stat-num">${kab.totalKecamatan}</div><div class="stat-label">Kecamatan di ${kab.name}</div></div>
+              <div class="stat-item"><div class="stat-num">Rp 7.000</div><div class="stat-label">Mulai per Kg</div></div>
+              <div class="stat-item"><div class="stat-num">6 Jam</div><div class="stat-label">Express Tercepat</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section-alt">
+          <div class="container">
+            <div class="section-head">
+              <div class="badge">🗺️ Pilih Kecamatan</div>
+              <h2>Kecamatan Pilihan di ${kab.name}</h2>
+              <p>Pilih kecamatan terdekat untuk melihat detail tarif, desa tercover, dan kontak jemput.</p>
+            </div>
+            <div class="listing-grid">${kecGridHtml}</div>
+          </div>
+        </section>
+
+        ${renderServicesSection()}
+        ${renderCTASection(`Cucian Menumpuk di ${kab.name}?`, `Pesan laundry sekarang di wilayah ${kab.name}, kami jemput ke lokasi Anda.`)}
+      `;
+    }
+
+    // VIEW: 3. Kecamatan Detail Page
+    function renderKecamatanPage(kab, kec) {
+      const otherKecKeys = Object.keys(kab.kecamatan).filter(k => kab.kecamatan[k].slug !== kec.slug);
+      const otherKecHtml = otherKecKeys.map(k => {
+        const item = kab.kecamatan[k];
+        return `<li><a href="/${item.slug}" onclick="navigate(event, '/${item.slug}')">🧺 Laundry ${item.name}</a></li>`;
+      }).join('');
+
+      const desaTagsHtml = kec.desa.map(d => `<span class="desa-tag">📍 ${d}</span>`).join('');
+
+      return `
+        <div class="breadcrumb-wrap">
+          <div class="container">
+            <div class="breadcrumb">
+              <a href="/" onclick="navigate(event, '/')">Home</a> <span>›</span>
+              <a href="/${kab.slug}" onclick="navigate(event, '/${kab.slug}')">Laundry ${kab.name}</a> <span>›</span>
+              <strong>Kecamatan ${kec.name}</strong>
+            </div>
+          </div>
+        </div>
+
+        <section id="hero">
+          <div class="container">
+            <div class="hero-grid">
+              <div>
+                <div class="badge badge-orange">🧺 Area Kecamatan ${kec.name}, ${kab.name}</div>
+                <h1 class="hero-title">Laundry Kiloan <span class="hl-orange">${kec.name}</span> ${kab.name}</h1>
+                <p class="hero-sub">Solusi cuci pakaian cepat, wangi, dan rapi untuk warga ${kec.name}. Layanan express 6 jam dan antar jemput ke rumah Anda.</p>
+                <div class="hero-cta-group">
+                  <a href="https://wa.me/6285137396984?text=Halo%2C%20saya%20mau%20laundry%20di%20${encodeURIComponent(kec.name)}%20${encodeURIComponent(kab.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>
+                  <a href="#harga" class="btn btn-outline">Lihat Tarif ↓</a>
+                </div>
+              </div>
+              <div>
+                <div class="hero-card-visual">
+                  <div style="font-size: 3.5rem; margin-bottom: 8px;">🛵💨</div>
+                  <h3 style="color:#fff;">Antar Jemput Gratis</h3>
+                  <p style="color: rgba(255,255,255,.8); font-size: .9rem;">Area ${kec.name} min. 3 kg</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="stats">
+          <div class="container">
+            <div class="stats-grid">
+              <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Tahun Berpengalaman</div></div>
+              <div class="stat-item"><div class="stat-num">4.8 ⭐</div><div class="stat-label">Rating Kepuasan</div></div>
+              <div class="stat-item"><div class="stat-num">Rp 7.000</div><div class="stat-label">Mulai per Kg</div></div>
+              <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Garansi Cuci Ulang</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Intro -->
+        <section class="section section-alt">
+          <div class="container">
+            <div class="unique-intro-wrap">
+              <h2 class="unique-intro-title">Laundry Kiloan: Solusi Praktis untuk Warga ${kec.name}</h2>
+              <p class="unique-intro-text">Bagi Anda yang beraktivitas padat di wilayah ${kec.name} dan sekitarnya, meluangkan 3-5 jam setiap minggu untuk mencuci dan menyetrika sering kali melelahkan. Kami hadir memberikan solusi terbaik dengan tarif terjangkau mulai Rp 7.000/kg.</p>
+              <p class="unique-intro-text">Dengan kurir antar-jemput yang siap datang ke lokasi Anda di ${kec.name}, Anda tidak perlu lagi repot mengantar pakaian kotor ke konter.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Layanan -->
+        ${renderServicesSection()}
+
+        <!-- Harga -->
+        <section class="section section-alt" id="harga">
+          <div class="container">
+            <div class="section-head">
+              <div class="badge badge-orange">💰 Paket & Harga</div>
+              <h2>Daftar Tarif Laundry di ${kec.name}</h2>
+              <p>Harga jelas dan transparan tanpa ada biaya tersembunyi.</p>
+            </div>
+            <div class="pricing-grid">
+              <div class="price-card">
+                <h3>Reguler</h3>
+                <p style="font-size: .85rem; color: var(--gray);">Selesai 2 Hari</p>
+                <div class="price-amount">Rp 7.000</div>
+                <p style="font-size: .85rem; color: var(--gray);">/ kg (Min. 3 kg)</p>
+                <ul class="price-features">
+                  <li>Cuci, kering & lipat rapi</li>
+                  <li>Detergen + pewangi premium</li>
+                  <li>Pemisahan pakaian putih/warna</li>
+                </ul>
+                <a href="https://wa.me/6285137396984?text=Order%20Reguler%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-primary" style="width:100%;">Pesan Reguler</a>
+              </div>
+
+              <div class="price-card featured">
+                <span class="price-badge">Paling Cepat</span>
+                <h3>Express 6 Jam</h3>
+                <p style="font-size: .85rem; color: var(--gray);">Selesai Hari yang Sama</p>
+                <div class="price-amount">Rp 12.000</div>
+                <p style="font-size: .85rem; color: var(--gray);">/ kg (Min. 3 kg)</p>
+                <ul class="price-features">
+                  <li>Prioritas antrean mesin utama</li>
+                  <li>Selesai 6-12 jam kerja</li>
+                  <li>Notifikasi WhatsApp saat siap kirim</li>
+                </ul>
+                <a href="https://wa.me/6285137396984?text=Order%20Express%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-orange" style="width:100%;">Pesan Express</a>
+              </div>
+
+              <div class="price-card">
+                <h3>Cuci + Setrika</h3>
+                <p style="font-size: .85rem; color: var(--gray);">Selesai 2-3 Hari</p>
+                <div class="price-amount">Rp 10.000</div>
+                <p style="font-size: .85rem; color: var(--gray);">/ kg (Min. 3 kg)</p>
+                <ul class="price-features">
+                  <li>Setrika uap rapi per helai</li>
+                  <li>Siap gantung / simpan di lemari</li>
+                  <li>Cocok untuk kemeja & seragam kerja</li>
+                </ul>
+                <a href="https://wa.me/6285137396984?text=Order%20Cuci%20Setrika%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-primary" style="width:100%;">Pesan Cuci Setrika</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Cara Kerja -->
+        <section class="section">
+          <div class="container">
+            <div class="section-head">
+              <div class="badge">📋 4 Langkah Mudah</div>
+              <h2>Cara Pesan Antar Jemput di ${kec.name}</h2>
+            </div>
+            <div class="steps-wrap">
+              <div class="step-item"><div class="step-num">1</div><h4>Chat WhatsApp</h4><p style="font-size:.85rem; color:var(--gray); margin-top:6px;">Kirimkan alamat dan jumlah estimasi cucian.</p></div>
+              <div class="step-item"><div class="step-num">2</div><h4>Kurir Menjemput</h4><p style="font-size:.85rem; color:var(--gray); margin-top:6px;">Timbang di tempat dan verifikasi rincian biaya.</p></div>
+              <div class="step-item"><div class="step-num">3</div><h4>Proses Cuci</h4><p style="font-size:.85rem; color:var(--gray); margin-top:6px;">Pencucian higienis sesuai paket pilihan Anda.</p></div>
+              <div class="step-item"><div class="step-num">4</div><h4>Diantar Bersih</h4><p style="font-size:.85rem; color:var(--gray); margin-top:6px;">Pakaian wangi dan rapi diantar ke alamat Anda.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Area Jangkauan Desa -->
+        <section class="section section-alt" id="jangkauan">
+          <div class="container">
+            <div class="section-head">
+              <div class="badge">🗺️ Jangkauan Antar Jemput</div>
+              <h2>Kelurahan / Desa di Kecamatan ${kec.name}</h2>
+              <p>Layanan kurir jemput-antar kami menjangkau seluruh area desa berikut:</p>
+            </div>
+            <div class="coverage-box">
+              <div class="desa-grid">${desaTagsHtml}</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Area Lain -->
+        <section class="section">
+          <div class="container">
+            <div class="section-head">
+              <div class="badge">🔗 Area Lainnya</div>
+              <h2>Kecamatan Lain di ${kab.name}</h2>
+            </div>
+            <div style="background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding:24px;">
+              <ul style="list-style:none; display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:12px;">
+                ${otherKecHtml}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        ${renderFAQSection()}
+        ${renderCTASection(`Cucian Menumpuk di ${kec.name}?`, `Pesan laundry sekarang, tim kami jemput langsung ke depan pintu Anda.`)}
+      `;
+    }
+
+    // PARTIAL REUSABLE COMPONENTS
+    function renderServicesSection() {
+      return `
+        <section class="section">
+          <div class="container">
+            <div class="section-head">
+              <div class="badge">🧺 Layanan Pilihan</div>
+              <h2>Pilihan Layanan Laundry</h2>
+            </div>
+            <div class="services-grid">
+              <div class="service-card">
+                <div class="listing-icon">👕</div>
+                <h3>Laundry Kiloan Reguler</h3>
+                <p>Cuci bersih, kering sempurna, dan lipat rapi. Estimasi pengerjaan 2 hari kerja.</p>
+                <div class="service-price">Mulai Rp 7.000 / kg</div>
+              </div>
+              <div class="service-card">
+                <div class="listing-icon">⚡</div>
+                <h3>Laundry Express 6 Jam</h3>
+                <p>Layanan kilat untuk kebutuhan darurat. Pakaian bersih dalam hitungan jam.</p>
+                <div class="service-price">Mulai Rp 12.000 / kg</div>
+              </div>
+              <div class="service-card">
+                <div class="listing-icon">👔</div>
+                <h3>Cuci + Setrika Uap</h3>
+                <p>Pakaian rapi bebas kusut siap pakai. Menggunakan setrika uap berstandar butik.</p>
+                <div class="service-price">Mulai Rp 10.000 / kg</div>
+              </div>
+              <div class="service-card">
+                <div class="listing-icon">🛏️</div>
+                <h3>Seprai, Bed Cover & Selimut</h3>
+                <p>Dicuci dengan tabung mesin besar untuk memastikan debu dan tungau hilang total.</p>
+                <div class="service-price">Mulai Rp 15.000 / item</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderFAQSection() {
+      return `
+        <section class="section section-alt" id="faq">
+          <div class="container">
+            <div class="section-head">
+              <div class="badge">❓ Tanya Jawab</div>
+              <h2>Pertanyaan yang Sering Diajukan</h2>
+            </div>
+            <div class="faq-list">
+              <div class="faq-item">
+                <div class="faq-q"><span>Berapa batas minimum order laundry?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Minimum order untuk layanan antar jemput gratis adalah 3 kg. Jika di bawah 3 kg tetap akan dihitung 3 kg.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-q"><span>Apakah ada garansi jika cucian rusak atau kurang bersih?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Ya, kami memberikan garansi cuci ulang 100% gratis jika hasil cucian tidak harum atau kurang bersih. Cukup infokan via WhatsApp maksimal 24 jam setelah pesanan diterima.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-q"><span>Bagaimana cara pembayaran?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Pembayaran dapat dilakukan secara tunai (COD) saat cucian bersih diantar kembali, atau melalui transfer bank/QRIS.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderCTASection(title, desc) {
+      return `
+        <section id="final-cta">
+          <div class="container">
+            <h2>${title}</h2>
+            <p>${desc}</p>
+            <a href="https://wa.me/6285137396984?text=Halo%20Laundry%20Kiloan%2C%20saya%20mau%20order" target="_blank" rel="noopener" class="btn btn-wa btn-lg">
+              💬 Pesan via WhatsApp Sekarang
+            </a>
+          </div>
+        </section>
+      `;
+    }
+
+    function initFAQ() {
+      document.querySelectorAll('.faq-q').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const wasOpen = item.classList.contains('open');
+          document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+          if (!wasOpen) item.classList.add('open');
+        });
+      });
+    }
+
+    // Inisialisasi awal saat load
+    window.addEventListener('DOMContentLoaded', renderRoute);
+  </script>
+</body>
+</html>
