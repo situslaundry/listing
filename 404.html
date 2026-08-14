@@ -17,18 +17,6 @@
   <meta property="og:url" id="og-url" content="">
   <meta property="og:locale" content="id_ID">
 
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json" id="schema-json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Laundry Listing",
-    "telephone": "+6285773009666",
-    "priceRange": "Rp 7.000 - Rp 12.000/kg",
-    "url": "https://laundrykiloan.net/"
-  }
-  </script>
-
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -235,7 +223,7 @@
     </div>
   </header>
 
-  <!-- Dynamic Content Injected Here -->
+  <!-- Dynamic Content Container -->
   <main id="app"></main>
 
   <!-- Floating WhatsApp -->
@@ -264,7 +252,7 @@
         </div>
         <div>
           <h3>Layanan Kami</h3>
-          <ul id="footer-service-links">
+          <ul>
             <li><a class="footer-wa-link" href="#" target="_blank">Laundry Kiloan Reguler</a></li>
             <li><a class="footer-wa-link" href="#" target="_blank">Laundry Express 6 Jam</a></li>
             <li><a class="footer-wa-link" href="#" target="_blank">Cuci + Setrika Uap</a></li>
@@ -278,42 +266,66 @@
     </div>
   </footer>
 
-  <!-- 1. PEMANGGILAN FILE EKSTERNAL DENGAN RELATIVE PATH AMAN -->
-  <script src="https://situslaundry.github.io/listing/js/config.js"></script>
-  <script src="https://situslaundry.github.io/listing/js/dataWilayah.js"></script>
-
-  <!-- 2. ROUTING ENGINE -->
+  <!-- SCRIPT ENGINE & AUTO SCRIPT INJECTOR -->
   <script>
-    // Deteksi Base Path (Mendukung /listing/ di GitHub Pages maupun Domain Root)
+    // 1. Deteksi Base Path yang benar (/listing/ atau /)
     const isGitHubPages = window.location.hostname.endsWith('github.io');
-    const pathSegments = window.location.pathname.split('/').filter(Boolean);
-    const basePath = (isGitHubPages && pathSegments.length > 0 && pathSegments[0] === 'listing') ? '/listing/' : '/';
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const basePath = (isGitHubPages && pathParts.length > 0 && pathParts[0] === 'listing') ? '/listing/' : '/';
 
-    // Ambil variabel dari file eksternal config & dataWilayah
-    const config = window.SITE_CONFIG || {
-      siteName: "Laundry Listing",
-      defaultPhone: "6285773009666",
-      baseDomain: "https://laundrykiloan.net",
-      defaultPricePerKg: "Rp 7.000",
-      expressPricePerKg: "Rp 12.000",
-      cuciSetrikaPricePerKg: "Rp 10.000"
-    };
-    const dataWilayah = window.DATA_WILAYAH || {};
+    // 2. Fungsi Load Script Eksternal secara Terjamin
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = () => {
+          console.warn("Gagal memuat file script: " + src);
+          resolve(); // Lanjut agar tidak macet total
+        };
+        document.head.appendChild(s);
+      });
+    }
 
-    // Inisialisasi link & teks berdasarkan Config
-    document.getElementById('brand-logo').setAttribute('href', basePath);
-    document.querySelectorAll('.site-title-text').forEach(el => el.innerText = config.siteName);
-    
-    const waBaseUrl = `https://wa.me/${config.defaultPhone}?text=Halo%20${encodeURIComponent(config.siteName)}`;
-    document.getElementById('header-wa-btn').setAttribute('href', `${waBaseUrl}%2C%20saya%20mau%20order`);
-    document.getElementById('wa-float-btn').setAttribute('href', waBaseUrl);
-    document.querySelectorAll('.footer-wa-link').forEach(el => el.setAttribute('href', `${waBaseUrl}%2C%20saya%20mau%20tanya%20layanan`));
-    
-    const phoneLink = document.getElementById('footer-phone-link');
-    phoneLink.setAttribute('href', `tel:+${config.defaultPhone}`);
-    phoneLink.innerText = config.defaultPhone.startsWith('62') ? '0' + config.defaultPhone.slice(2) : config.defaultPhone;
+    // 3. Fallback jika file JS gagal terunduh
+    function getConfig() {
+      return window.SITE_CONFIG || {
+        siteName: "Laundry Listing",
+        defaultPhone: "6285773009666",
+        defaultPricePerKg: "Rp 7.000",
+        expressPricePerKg: "Rp 12.000",
+        cuciSetrikaPricePerKg: "Rp 10.000"
+      };
+    }
 
-    // Helper Navigasi SPA
+    function getDataWilayah() {
+      return window.DATA_WILAYAH || {};
+    }
+
+    function updateStaticUI() {
+      const cfg = getConfig();
+      const brandLogo = document.getElementById('brand-logo');
+      if (brandLogo) brandLogo.setAttribute('href', basePath);
+      
+      document.querySelectorAll('.site-title-text').forEach(el => el.innerText = cfg.siteName);
+      
+      const waUrl = `https://wa.me/${cfg.defaultPhone}?text=Halo%20${encodeURIComponent(cfg.siteName)}`;
+      const headerWa = document.getElementById('header-wa-btn');
+      if (headerWa) headerWa.setAttribute('href', `${waUrl}%2C%20saya%20mau%20order`);
+      
+      const waFloat = document.getElementById('wa-float-btn');
+      if (waFloat) waFloat.setAttribute('href', waUrl);
+      
+      document.querySelectorAll('.footer-wa-link').forEach(el => el.setAttribute('href', `${waUrl}%2C%20saya%20mau%20tanya%20layanan`));
+      
+      const phoneLink = document.getElementById('footer-phone-link');
+      if (phoneLink) {
+        phoneLink.setAttribute('href', `tel:+${cfg.defaultPhone}`);
+        phoneLink.innerText = cfg.defaultPhone.startsWith('62') ? '0' + cfg.defaultPhone.slice(2) : cfg.defaultPhone;
+      }
+    }
+
+    // 4. Navigasi SPA
     function navigate(e, relativeSlug) {
       if (e) e.preventDefault();
       const targetUrl = relativeSlug ? `${basePath}${relativeSlug}` : basePath;
@@ -325,18 +337,22 @@
     window.addEventListener('popstate', renderRoute);
 
     function updateSEO(title, desc, relativeSlug) {
+      const cfg = getConfig();
       document.title = title;
-      document.getElementById('page-title').innerText = title;
-      document.getElementById('page-desc').setAttribute('content', desc);
-      document.getElementById('og-title').setAttribute('content', title);
-      document.getElementById('og-desc').setAttribute('content', desc);
-      const fullUrl = (config.baseDomain || window.location.origin) + (relativeSlug ? `${basePath}${relativeSlug}` : basePath);
-      document.getElementById('page-canonical').setAttribute('href', fullUrl);
-      document.getElementById('og-url').setAttribute('content', fullUrl);
+      const pt = document.getElementById('page-title'); if (pt) pt.innerText = title;
+      const pd = document.getElementById('page-desc'); if (pd) pd.setAttribute('content', desc);
+      const ot = document.getElementById('og-title'); if (ot) ot.setAttribute('content', title);
+      const od = document.getElementById('og-desc'); if (od) od.setAttribute('content', desc);
+      const fullUrl = window.location.origin + (relativeSlug ? `${basePath}${relativeSlug}` : basePath);
+      const pc = document.getElementById('page-canonical'); if (pc) pc.setAttribute('href', fullUrl);
+      const ou = document.getElementById('og-url'); if (ou) ou.setAttribute('content', fullUrl);
     }
 
-    // Router
+    // 5. Router Dispatcher
     function renderRoute() {
+      const cfg = getConfig();
+      const dataWilayah = getDataWilayah();
+      
       let currentPath = window.location.pathname;
       if (currentPath.startsWith(basePath)) {
         currentPath = currentPath.slice(basePath.length);
@@ -344,14 +360,15 @@
       
       const cleanSlug = currentPath.replace(/^\/|\/$/g, '');
       const app = document.getElementById('app');
+      if (!app) return;
 
       if (cleanSlug === '') {
         updateSEO(
-          `${config.siteName} – Direktori & Layanan Laundry Kiloan Express`,
-          `${config.siteName}: Layanan laundry kiloan dan express terpercaya di Indonesia. Mulai ${config.defaultPricePerKg}/kg, hasil bersih, wangi, rapi, dan antar jemput.`,
+          `${cfg.siteName} – Direktori & Layanan Laundry Kiloan Express`,
+          `${cfg.siteName}: Layanan laundry kiloan dan express terpercaya di Indonesia. Mulai ${cfg.defaultPricePerKg}/kg, hasil bersih, wangi, rapi, dan antar jemput.`,
           ""
         );
-        app.innerHTML = renderHomePage();
+        app.innerHTML = renderHomePage(cfg, dataWilayah);
       } else {
         let matchedKab = null;
         let matchedKec = null;
@@ -372,18 +389,18 @@
 
         if (matchedKec && matchedKab) {
           updateSEO(
-            `Laundry Kiloan ${matchedKec.name} – Bersih & Wangi | ${config.siteName} ${matchedKab.name}`,
-            `Laundry kiloan di ${matchedKec.name}, ${matchedKab.name}. Mulai ${config.defaultPricePerKg}/kg, express 6 jam, antar jemput gratis, garansi cuci ulang.`,
+            `Laundry Kiloan ${matchedKec.name} – Bersih & Wangi | ${cfg.siteName} ${matchedKab.name}`,
+            `Laundry kiloan di ${matchedKec.name}, ${matchedKab.name}. Mulai ${cfg.defaultPricePerKg}/kg, express 6 jam, antar jemput gratis, garansi cuci ulang.`,
             matchedKec.slug
           );
-          app.innerHTML = renderKecamatanPage(matchedKab, matchedKec);
+          app.innerHTML = renderKecamatanPage(cfg, matchedKab, matchedKec);
         } else if (matchedKab) {
           updateSEO(
-            `${config.siteName} ${matchedKab.name} – Direktori Laundry Kiloan | Antar Jemput`,
-            `Layanan laundry kiloan terpercaya di seluruh ${matchedKab.name}. Mulai ${config.defaultPricePerKg}/kg, express 6 jam, melayani seluruh kecamatan.`,
+            `${cfg.siteName} ${matchedKab.name} – Direktori Laundry Kiloan | Antar Jemput`,
+            `Layanan laundry kiloan terpercaya di seluruh ${matchedKab.name}. Mulai ${cfg.defaultPricePerKg}/kg, express 6 jam, melayani seluruh kecamatan.`,
             matchedKab.slug
           );
-          app.innerHTML = renderKabupatenPage(matchedKab);
+          app.innerHTML = renderKabupatenPage(cfg, matchedKab);
         } else {
           app.innerHTML = `
             <div class="container section" style="text-align:center; padding: 100px 24px;">
@@ -397,8 +414,8 @@
       initFAQ();
     }
 
-    // View: Home
-    function renderHomePage() {
+    // View: Beranda
+    function renderHomePage(cfg, dataWilayah) {
       const kabKeys = Object.keys(dataWilayah);
       const kabGridHtml = kabKeys.map(key => {
         const kab = dataWilayah[key];
@@ -419,17 +436,17 @@
             <div class="hero-grid">
               <div>
                 <div class="badge badge-orange">🧼 Direktori & Layanan Laundry</div>
-                <h1 class="hero-title">Jasa Laundry Kiloan &amp; Express <span class="hl-orange">${config.siteName}</span></h1>
+                <h1 class="hero-title">Jasa Laundry Kiloan &amp; Express <span class="hl-orange">${cfg.siteName}</span></h1>
                 <p class="hero-sub">Layanan laundry profesional dengan standar higienis tinggi, detergen premium, pemisahan warna ketat, dan gratis antar-jemput.</p>
                 <div class="hero-cta-group">
-                  <a href="https://wa.me/${config.defaultPhone}?text=Halo%20${encodeURIComponent(config.siteName)}%2C%20saya%20mau%20order" target="_blank" class="btn btn-wa btn-lg">💬 Pesan Sekarang</a>
+                  <a href="https://wa.me/${cfg.defaultPhone}?text=Halo%20${encodeURIComponent(cfg.siteName)}%2C%20saya%20mau%20order" target="_blank" class="btn btn-wa btn-lg">💬 Pesan Sekarang</a>
                   <a href="#area-layanan" class="btn btn-outline">Pilih Kota / Kabupaten ↓</a>
                 </div>
               </div>
               <div>
                 <div class="hero-card-visual">
                   <div style="font-size: 3.5rem; margin-bottom: 12px;">👕✨</div>
-                  <h3 style="color:#fff; margin-bottom: 6px;">Mulai ${config.defaultPricePerKg} / kg</h3>
+                  <h3 style="color:#fff; margin-bottom: 6px;">Mulai ${cfg.defaultPricePerKg} / kg</h3>
                   <p style="color: rgba(255,255,255,.8); font-size: .9rem;">Garansi Cuci Ulang 100% Gratis</p>
                 </div>
               </div>
@@ -441,9 +458,9 @@
           <div class="container">
             <div class="stats-grid">
               <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Tahun Pengalaman</div></div>
-              <div class="stat-item"><div class="stat-num">${kabKeys.length}+</div><div class="stat-label">Kabupaten / Kota</div></div>
+              <div class="stat-item"><div class="stat-num">${kabKeys.length || 30}+</div><div class="stat-label">Kabupaten / Kota</div></div>
               <div class="stat-item"><div class="stat-num">700+</div><div class="stat-label">Kecamatan Tercover</div></div>
-              <div class="stat-item"><div class="stat-num">${config.defaultPricePerKg}</div><div class="stat-label">Harga Mulai /kg</div></div>
+              <div class="stat-item"><div class="stat-num">${cfg.defaultPricePerKg}</div><div class="stat-label">Harga Mulai /kg</div></div>
             </div>
           </div>
         </section>
@@ -455,7 +472,7 @@
               <h2>Pilih Kota / Kabupaten Anda</h2>
               <p>Pilih kota Anda untuk menemukan layanan laundry terdekat dan area jangkauan antar-jemput.</p>
             </div>
-            <div class="listing-grid">${kabGridHtml}</div>
+            <div class="listing-grid">${kabGridHtml || '<p style="text-align:center;width:100%;">Data area belum tersedia.</p>'}</div>
           </div>
         </section>
 
@@ -463,7 +480,7 @@
           <div class="container">
             <div class="section-head">
               <div class="badge badge-orange">🏆 Keunggulan</div>
-              <h2>Mengapa Memilih ${config.siteName}?</h2>
+              <h2>Mengapa Memilih ${cfg.siteName}?</h2>
               <p>Standar layanan terbaik yang kami jaga di setiap kilogram pakaian Anda.</p>
             </div>
             <div class="services-grid">
@@ -474,14 +491,14 @@
           </div>
         </section>
 
-        ${renderFAQSection()}
-        ${renderCTASection("Cucian Menumpuk di Rumah?", `Serahkan pada ${config.siteName}, beres tanpa repot. Mulai ${config.defaultPricePerKg}/kg.`)}
+        ${renderFAQSection(cfg)}
+        ${renderCTASection(cfg, "Cucian Menumpuk di Rumah?", `Serahkan pada ${cfg.siteName}, beres tanpa repot. Mulai ${cfg.defaultPricePerKg}/kg.`)}
       `;
     }
 
     // View: Kabupaten
-    function renderKabupatenPage(kab) {
-      const kecKeys = Object.keys(kab.kecamatan);
+    function renderKabupatenPage(cfg, kab) {
+      const kecKeys = Object.keys(kab.kecamatan || {});
       const kecGridHtml = kecKeys.map(key => {
         const kec = kab.kecamatan[key];
         return `
@@ -489,7 +506,7 @@
             <div class="listing-icon">📍</div>
             <div>
               <div class="listing-name">Laundry ${kec.name}</div>
-              <div class="listing-sub">${kec.desa.slice(0, 3).join(', ')}...</div>
+              <div class="listing-sub">${(kec.desa || []).slice(0, 3).join(', ')}...</div>
             </div>
           </a>
         `;
@@ -508,9 +525,9 @@
         <section id="hero">
           <div class="container" style="text-align: center;">
             <div class="badge badge-orange">📍 Area Kabupaten / Kota ${kab.name}</div>
-            <h1 class="hero-title" style="max-width: 750px; margin: 0 auto 16px;">${config.siteName} <span class="hl-orange">${kab.name}</span> – Antar Jemput Gratis</h1>
-            <p class="hero-sub" style="margin: 0 auto 28px;">Melayani ${kab.totalKecamatan} kecamatan di ${kab.name}. Bersih, harum, rapi, mulai ${config.defaultPricePerKg}/kg.</p>
-            <a href="https://wa.me/${config.defaultPhone}?text=Halo%20${encodeURIComponent(config.siteName)}%2C%20saya%20mau%20order%20di%20${encodeURIComponent(kab.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>
+            <h1 class="hero-title" style="max-width: 750px; margin: 0 auto 16px;">${cfg.siteName} <span class="hl-orange">${kab.name}</span> – Antar Jemput Gratis</h1>
+            <p class="hero-sub" style="margin: 0 auto 28px;">Melayani ${kab.totalKecamatan} kecamatan di ${kab.name}. Bersih, harum, rapi, mulai ${cfg.defaultPricePerKg}/kg.</p>
+            <a href="https://wa.me/${cfg.defaultPhone}?text=Halo%20${encodeURIComponent(cfg.siteName)}%2C%20saya%20mau%20order%20di%20${encodeURIComponent(kab.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>
           </div>
         </section>
 
@@ -519,7 +536,7 @@
             <div class="stats-grid">
               <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Tahun Melayani</div></div>
               <div class="stat-item"><div class="stat-num">${kab.totalKecamatan}</div><div class="stat-label">Kecamatan di ${kab.name}</div></div>
-              <div class="stat-item"><div class="stat-num">${config.defaultPricePerKg}</div><div class="stat-label">Mulai per Kg</div></div>
+              <div class="stat-item"><div class="stat-num">${cfg.defaultPricePerKg}</div><div class="stat-label">Mulai per Kg</div></div>
               <div class="stat-item"><div class="stat-num">6 Jam</div><div class="stat-label">Express Tercepat</div></div>
             </div>
           </div>
@@ -536,20 +553,20 @@
           </div>
         </section>
 
-        ${renderServicesSection()}
-        ${renderCTASection(`Cucian Menumpuk di ${kab.name}?`, `Pesan laundry sekarang di wilayah ${kab.name}, kami jemput ke lokasi Anda.`)}
+        ${renderServicesSection(cfg)}
+        ${renderCTASection(cfg, `Cucian Menumpuk di ${kab.name}?`, `Pesan laundry sekarang di wilayah ${kab.name}, kami jemput ke lokasi Anda.`)}
       `;
     }
 
     // View: Kecamatan
-    function renderKecamatanPage(kab, kec) {
-      const otherKecKeys = Object.keys(kab.kecamatan).filter(k => kab.kecamatan[k].slug !== kec.slug);
+    function renderKecamatanPage(cfg, kab, kec) {
+      const otherKecKeys = Object.keys(kab.kecamatan || {}).filter(k => kab.kecamatan[k].slug !== kec.slug);
       const otherKecHtml = otherKecKeys.map(k => {
         const item = kab.kecamatan[k];
         return `<li><a href="${basePath}${item.slug}" onclick="navigate(event, '${item.slug}')">🧺 Laundry ${item.name}</a></li>`;
       }).join('');
 
-      const desaTagsHtml = kec.desa.map(d => `<span class="desa-tag">📍 ${d}</span>`).join('');
+      const desaTagsHtml = (kec.desa || []).map(d => `<span class="desa-tag">📍 ${d}</span>`).join('');
 
       return `
         <div class="breadcrumb-wrap">
@@ -570,7 +587,7 @@
                 <h1 class="hero-title">Laundry Kiloan <span class="hl-orange">${kec.name}</span> ${kab.name}</h1>
                 <p class="hero-sub">Solusi cuci pakaian cepat, wangi, dan rapi untuk warga ${kec.name}. Layanan express 6 jam dan antar jemput ke rumah Anda.</p>
                 <div class="hero-cta-group">
-                  <a href="https://wa.me/${config.defaultPhone}?text=Halo%2C%20saya%20mau%20laundry%20di%20${encodeURIComponent(kec.name)}%20${encodeURIComponent(kab.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>
+                  <a href="https://wa.me/${cfg.defaultPhone}?text=Halo%2C%20saya%20mau%20laundry%20di%20${encodeURIComponent(kec.name)}%20${encodeURIComponent(kab.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>
                   <a href="#harga" class="btn btn-outline">Lihat Tarif ↓</a>
                 </div>
               </div>
@@ -590,27 +607,24 @@
             <div class="stats-grid">
               <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Tahun Berpengalaman</div></div>
               <div class="stat-item"><div class="stat-num">4.8 ⭐</div><div class="stat-label">Rating Kepuasan</div></div>
-              <div class="stat-item"><div class="stat-num">${config.defaultPricePerKg}</div><div class="stat-label">Mulai per Kg</div></div>
+              <div class="stat-item"><div class="stat-num">${cfg.defaultPricePerKg}</div><div class="stat-label">Mulai per Kg</div></div>
               <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Garansi Cuci Ulang</div></div>
             </div>
           </div>
         </section>
 
-        <!-- Intro -->
         <section class="section section-alt">
           <div class="container">
             <div class="unique-intro-wrap">
-              <h2 class="unique-intro-title">${config.siteName}: Solusi Praktis untuk Warga ${kec.name}</h2>
-              <p class="unique-intro-text">Bagi Anda yang beraktivitas padat di wilayah ${kec.name} dan sekitarnya, meluangkan 3-5 jam setiap minggu untuk mencuci dan menyetrika pakaian sering kali melelahkan. ${config.siteName} hadir memberikan kemudahan dengan tarif terjangkau mulai ${config.defaultPricePerKg}/kg.</p>
+              <h2 class="unique-intro-title">${cfg.siteName}: Solusi Praktis untuk Warga ${kec.name}</h2>
+              <p class="unique-intro-text">Bagi Anda yang beraktivitas padat di wilayah ${kec.name} dan sekitarnya, meluangkan 3-5 jam setiap minggu untuk mencuci dan menyetrika pakaian sering kali melelahkan. ${cfg.siteName} hadir memberikan kemudahan dengan tarif terjangkau mulai ${cfg.defaultPricePerKg}/kg.</p>
               <p class="unique-intro-text">Dengan kurir antar-jemput yang siap datang ke lokasi Anda di ${kec.name}, Anda tidak perlu lagi repot mengantar pakaian kotor ke konter.</p>
             </div>
           </div>
         </section>
 
-        <!-- Layanan -->
-        ${renderServicesSection()}
+        ${renderServicesSection(cfg)}
 
-        <!-- Harga -->
         <section class="section section-alt" id="harga">
           <div class="container">
             <div class="section-head">
@@ -622,47 +636,46 @@
               <div class="price-card">
                 <h3>Reguler</h3>
                 <p style="font-size: .85rem; color: var(--gray);">Selesai 2 Hari</p>
-                <div class="price-amount">${config.defaultPricePerKg}</div>
+                <div class="price-amount">${cfg.defaultPricePerKg}</div>
                 <p style="font-size: .85rem; color: var(--gray);">/ kg (Min. 3 kg)</p>
                 <ul class="price-features">
                   <li>Cuci, kering & lipat rapi</li>
                   <li>Detergen + pewangi premium</li>
                   <li>Pemisahan pakaian putih/warna</li>
                 </ul>
-                <a href="https://wa.me/${config.defaultPhone}?text=Order%20Reguler%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-primary" style="width:100%;">Pesan Reguler</a>
+                <a href="https://wa.me/${cfg.defaultPhone}?text=Order%20Reguler%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-primary" style="width:100%;">Pesan Reguler</a>
               </div>
 
               <div class="price-card featured">
                 <span class="price-badge">Paling Cepat</span>
                 <h3>Express 6 Jam</h3>
                 <p style="font-size: .85rem; color: var(--gray);">Selesai Hari yang Sama</p>
-                <div class="price-amount">${config.expressPricePerKg}</div>
+                <div class="price-amount">${cfg.expressPricePerKg}</div>
                 <p style="font-size: .85rem; color: var(--gray);">/ kg (Min. 3 kg)</p>
                 <ul class="price-features">
                   <li>Prioritas antrean mesin utama</li>
                   <li>Selesai 6-12 jam kerja</li>
                   <li>Notifikasi WhatsApp saat siap kirim</li>
                 </ul>
-                <a href="https://wa.me/${config.defaultPhone}?text=Order%20Express%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-orange" style="width:100%;">Pesan Express</a>
+                <a href="https://wa.me/${cfg.defaultPhone}?text=Order%20Express%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-orange" style="width:100%;">Pesan Express</a>
               </div>
 
               <div class="price-card">
                 <h3>Cuci + Setrika</h3>
                 <p style="font-size: .85rem; color: var(--gray);">Selesai 2-3 Hari</p>
-                <div class="price-amount">${config.cuciSetrikaPricePerKg}</div>
+                <div class="price-amount">${cfg.cuciSetrikaPricePerKg}</div>
                 <p style="font-size: .85rem; color: var(--gray);">/ kg (Min. 3 kg)</p>
                 <ul class="price-features">
                   <li>Setrika uap rapi per helai</li>
                   <li>Siap gantung / simpan di lemari</li>
                   <li>Cocok untuk kemeja & seragam kerja</li>
                 </ul>
-                <a href="https://wa.me/${config.defaultPhone}?text=Order%20Cuci%20Setrika%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-primary" style="width:100%;">Pesan Cuci Setrika</a>
+                <a href="https://wa.me/${cfg.defaultPhone}?text=Order%20Cuci%20Setrika%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-primary" style="width:100%;">Pesan Cuci Setrika</a>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- Cara Kerja -->
         <section class="section">
           <div class="container">
             <div class="section-head">
@@ -678,7 +691,6 @@
           </div>
         </section>
 
-        <!-- Area Jangkauan Desa -->
         <section class="section section-alt" id="jangkauan">
           <div class="container">
             <div class="section-head">
@@ -692,7 +704,6 @@
           </div>
         </section>
 
-        <!-- Area Lain -->
         <section class="section">
           <div class="container">
             <div class="section-head">
@@ -707,13 +718,13 @@
           </div>
         </section>
 
-        ${renderFAQSection()}
-        ${renderCTASection(`Cucian Menumpuk di ${kec.name}?`, `Pesan sekarang ke ${config.siteName}, tim kurir kami jemput ke depan pintu Anda.`)}
+        ${renderFAQSection(cfg)}
+        ${renderCTASection(cfg, `Cucian Menumpuk di ${kec.name}?`, `Pesan sekarang ke ${cfg.siteName}, tim kurir kami jemput ke depan pintu Anda.`)}
       `;
     }
 
     // Partials
-    function renderServicesSection() {
+    function renderServicesSection(cfg) {
       return `
         <section class="section">
           <div class="container">
@@ -726,19 +737,19 @@
                 <div class="listing-icon">👕</div>
                 <h3>Laundry Kiloan Reguler</h3>
                 <p>Cuci bersih, kering sempurna, dan lipat rapi. Estimasi pengerjaan 2 hari kerja.</p>
-                <div class="service-price">Mulai ${config.defaultPricePerKg} / kg</div>
+                <div class="service-price">Mulai ${cfg.defaultPricePerKg} / kg</div>
               </div>
               <div class="service-card">
                 <div class="listing-icon">⚡</div>
                 <h3>Laundry Express 6 Jam</h3>
                 <p>Layanan kilat untuk kebutuhan darurat. Pakaian bersih dalam hitungan jam.</p>
-                <div class="service-price">Mulai ${config.expressPricePerKg} / kg</div>
+                <div class="service-price">Mulai ${cfg.expressPricePerKg} / kg</div>
               </div>
               <div class="service-card">
                 <div class="listing-icon">👔</div>
                 <h3>Cuci + Setrika Uap</h3>
                 <p>Pakaian rapi bebas kusut siap pakai. Menggunakan setrika uap berstandar butik.</p>
-                <div class="service-price">Mulai ${config.cuciSetrikaPricePerKg} / kg</div>
+                <div class="service-price">Mulai ${cfg.cuciSetrikaPricePerKg} / kg</div>
               </div>
               <div class="service-card">
                 <div class="listing-icon">🛏️</div>
@@ -752,8 +763,8 @@
       `;
     }
 
-    function renderFAQSection() {
-      const phoneDisplay = config.defaultPhone.startsWith('62') ? '0' + config.defaultPhone.slice(2) : config.defaultPhone;
+    function renderFAQSection(cfg) {
+      const phoneDisplay = cfg.defaultPhone.startsWith('62') ? '0' + cfg.defaultPhone.slice(2) : cfg.defaultPhone;
       return `
         <section class="section section-alt" id="faq">
           <div class="container">
@@ -780,13 +791,13 @@
       `;
     }
 
-    function renderCTASection(title, desc) {
+    function renderCTASection(cfg, title, desc) {
       return `
         <section id="final-cta">
           <div class="container">
             <h2>${title}</h2>
             <p>${desc}</p>
-            <a href="https://wa.me/${config.defaultPhone}?text=Halo%20${encodeURIComponent(config.siteName)}%2C%20saya%20mau%20order" target="_blank" rel="noopener" class="btn btn-wa btn-lg">
+            <a href="https://wa.me/${cfg.defaultPhone}?text=Halo%20${encodeURIComponent(cfg.siteName)}%2C%20saya%20mau%20order" target="_blank" rel="noopener" class="btn btn-wa btn-lg">
               💬 Pesan via WhatsApp Sekarang
             </a>
           </div>
@@ -805,8 +816,18 @@
       });
     }
 
-    // Inisialisasi awal saat load
-    window.addEventListener('DOMContentLoaded', renderRoute);
+    // 6. Inisialisasi: Tunggu file JS ter-load sebelum mengeksekusi render router
+    async function initApp() {
+      // Load script eksternal dengan path dinamis yang aman dari subfolder
+      const scriptRoot = basePath.endsWith('/') ? basePath : basePath + '/';
+      await loadScript(`${scriptRoot}js/config.js`);
+      await loadScript(`${scriptRoot}js/dataWilayah.js`);
+      
+      updateStaticUI();
+      renderRoute();
+    }
+
+    window.addEventListener('DOMContentLoaded', initApp);
   </script>
 </body>
 </html>
