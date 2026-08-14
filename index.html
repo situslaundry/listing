@@ -226,21 +226,21 @@
     <div class="container">
       <div class="header-inner">
         <a href="" class="logo" id="brand-logo" onclick="navigate(event, '')">
-          <div class="logo-icon">🧺</div> Laundry Listing
+          <div class="logo-icon">🧺</div> <span class="site-title-text">Laundry Listing</span>
         </a>
-        <a href="https://wa.me/6285773009666?text=Halo%20Laundry%20Listing%2C%20saya%20mau%20order" target="_blank" rel="noopener" class="header-cta">
+        <a id="header-wa-btn" href="" target="_blank" rel="noopener" class="header-cta">
           💬 Pesan via WhatsApp
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Dynamic Content -->
+  <!-- Dynamic Content Injected Here -->
   <main id="app"></main>
 
   <!-- Floating WhatsApp -->
   <div id="wa-float">
-    <a href="https://wa.me/6285773009666?text=Halo%20Laundry%20Listing" target="_blank" rel="noopener" class="wa-float-btn" aria-label="WhatsApp">
+    <a id="wa-float-btn" href="" target="_blank" rel="noopener" class="wa-float-btn" aria-label="WhatsApp">
       <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.552 4.116 1.52 5.849L.057 23.881a.5.5 0 00.611.611l6.032-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.948 0-3.773-.527-5.335-1.444l-.381-.228-3.949.958.977-3.83-.25-.397A9.961 9.961 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
     </a>
   </div>
@@ -250,7 +250,7 @@
     <div class="container">
       <div class="footer-inner">
         <div>
-          <div class="logo" style="color:#fff; margin-bottom: 12px;"><div class="logo-icon">🧺</div> Laundry Listing</div>
+          <div class="logo" style="color:#fff; margin-bottom: 12px;"><div class="logo-icon">🧺</div> <span class="site-title-text">Laundry Listing</span></div>
           <p style="font-size: .88rem; line-height: 1.6;">Portal direktori dan layanan laundry kiloan & express terpercaya di Indonesia. Antar jemput harian cepat, wangi, rapi, dan bergaransi.</p>
         </div>
         <div>
@@ -264,115 +264,56 @@
         </div>
         <div>
           <h3>Layanan Kami</h3>
-          <ul>
-            <li><a href="https://wa.me/6285773009666" target="_blank">Laundry Kiloan Reguler</a></li>
-            <li><a href="https://wa.me/6285773009666" target="_blank">Laundry Express 6 Jam</a></li>
-            <li><a href="https://wa.me/6285773009666" target="_blank">Cuci + Setrika Uap</a></li>
-            <li><a href="https://wa.me/6285773009666" target="_blank">Laundry Seprai & Selimut</a></li>
+          <ul id="footer-service-links">
+            <li><a class="footer-wa-link" href="#" target="_blank">Laundry Kiloan Reguler</a></li>
+            <li><a class="footer-wa-link" href="#" target="_blank">Laundry Express 6 Jam</a></li>
+            <li><a class="footer-wa-link" href="#" target="_blank">Cuci + Setrika Uap</a></li>
+            <li><a class="footer-wa-link" href="#" target="_blank">Laundry Seprai & Selimut</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-copy">
-        <p>&copy; 2026 Laundry Listing. Hubungi kami: <a href="tel:+6285773009666" style="color:#fff; text-decoration:underline;">085773009666</a></p>
+        <p>&copy; 2026 <span class="site-title-text">Laundry Listing</span>. Hubungi kami: <a id="footer-phone-link" href="" style="color:#fff; text-decoration:underline;"></a></p>
       </div>
     </div>
   </footer>
 
-  <!-- ROUTER & BASE PATH DETECTOR SCRIPT -->
+  <!-- 1. PEMANGGILAN FILE EKSTERNAL DENGAN RELATIVE PATH AMAN -->
+  <script src="./js/config.js"></script>
+  <script src="./js/dataWilayah.js"></script>
+
+  <!-- 2. ROUTING ENGINE -->
   <script>
-    // 1. Deteksi Base Path (Otomatis handle /listing/ di GitHub Pages atau / di domain utama)
+    // Deteksi Base Path (Mendukung /listing/ di GitHub Pages maupun Domain Root)
     const isGitHubPages = window.location.hostname.endsWith('github.io');
     const pathSegments = window.location.pathname.split('/').filter(Boolean);
     const basePath = (isGitHubPages && pathSegments.length > 0 && pathSegments[0] === 'listing') ? '/listing/' : '/';
 
-    const defaultPhone = "6285773009666";
-
-    // Update link logo di header
-    document.getElementById('brand-logo').setAttribute('href', basePath);
-
-    // Database Wilayah
-    const dataWilayah = {
-      "bogor": {
-        name: "Bogor",
-        slug: "laundry-bogor",
-        totalKecamatan: 40,
-        kecamatan: {
-          "cileungsi": {
-            name: "Cileungsi",
-            slug: "laundry-cileungsi-bogor",
-            desa: ["Cileungsi", "Cileungsi Kidul", "Cipenjo", "Cipeucang", "Dayeuh", "Gandoang", "Jatisari", "Limus Nunggal", "Mampir", "Mekarsari", "Pasir Angin", "Setu Sari"]
-          },
-          "gunung-putri": {
-            name: "Gunung Putri",
-            slug: "laundry-gunung-putri-bogor",
-            desa: ["Bojong Kulur", "Bojong Nangka", "Ciangsana", "Cicadas", "Cikeas Udik", "Gunung Putri", "Kragan", "Nagrak", "Tlajung Udik", "Wanaherang"]
-          },
-          "cibinong": {
-            name: "Cibinong",
-            slug: "laundry-cibinong-bogor",
-            desa: ["Cibinong", "Cirimekar", "Ciriung", "Harapan Jaya", "Karadenan", "Nanggewer", "Nanggewer Mekar", "Pabuaran", "Pabuaran Mekar", "Pakansari", "Pondok Rajeg", "Sukahati", "Tengah"]
-          },
-          "jonggol": {
-            name: "Jonggol",
-            slug: "laundry-jonggol-bogor",
-            desa: ["Balekambang", "Bendungan", "Cibodas", "Jonggol", "Singajaya", "Singasari", "Sirnagalih", "Sukagalih", "Sukajaya", "Sukamaju", "Sukamanah", "Sukanegara", "Sukasejati", "Weninggalih"]
-          },
-          "citeureup": {
-            name: "Citeureup",
-            slug: "laundry-citeureup-bogor",
-            desa: ["Citeureup", "Gunung Sari", "Hambalang", "Karang Asem Barat", "Karang Asem Timur", "Leuwinutug", "Pasir Mukti", "Puspanegara", "Puspasari", "Sanja", "Sukahati", "Tajur", "Tangkil"]
-          },
-          "bojonggede": {
-            name: "Bojonggede",
-            slug: "laundry-bojonggede-bogor",
-            desa: ["Bojong Baru", "Bojonggede", "Cimanggis", "Kedung Waringin", "Ragajaya", "Rawa Panjang", "Susukan", "Waringin Jaya"]
-          }
-        }
-      },
-      "bekasi": {
-        name: "Bekasi",
-        slug: "laundry-bekasi",
-        totalKecamatan: 23,
-        kecamatan: {
-          "tambun-selatan": {
-            name: "Tambun Selatan",
-            slug: "laundry-tambun-selatan-bekasi",
-            desa: ["Jatimulya", "Lambangjaya", "Lambangsari", "Mangunjaya", "Setiadarma", "Setiamekar", "Sumberjaya", "Tambun", "Tridaya Sakti"]
-          },
-          "cikarang-utara": {
-            name: "Cikarang Utara",
-            slug: "laundry-cikarang-utara-bekasi",
-            desa: ["Cikarang Kota", "Harjamekar", "Karangasih", "Karangbaru", "Karangraharja", "Mekarmukti", "Pasirgombong", "Simpangan", "Tanjungsari", "Waluya", "Wangunharja"]
-          }
-        }
-      },
-      "tangerang": {
-        name: "Tangerang",
-        slug: "laundry-tangerang",
-        totalKecamatan: 29,
-        kecamatan: {
-          "serpong": {
-            name: "Serpong",
-            slug: "laundry-serpong-tangerang",
-            desa: ["Buaran", "Ciater", "Cilenggang", "Lengkong Gudang", "Lengkong Gudang Timur", "Lengkong Wetan", "Rawa Buntu", "Rawa Mekar Jaya", "Serpong"]
-          }
-        }
-      },
-      "bandung": {
-        name: "Bandung",
-        slug: "laundry-bandung",
-        totalKecamatan: 31,
-        kecamatan: {
-          "coblong": {
-            name: "Coblong",
-            slug: "laundry-coblong-bandung",
-            desa: ["Cipaganti", "Dago", "Lebak Gede", "Lebak Siliwangi", "Sadang Serang", "Sekeloa"]
-          }
-        }
-      }
+    // Ambil variabel dari file eksternal config & dataWilayah
+    const config = window.SITE_CONFIG || {
+      siteName: "Laundry Listing",
+      defaultPhone: "6285773009666",
+      baseDomain: "https://laundrykiloan.net",
+      defaultPricePerKg: "Rp 7.000",
+      expressPricePerKg: "Rp 12.000",
+      cuciSetrikaPricePerKg: "Rp 10.000"
     };
+    const dataWilayah = window.DATA_WILAYAH || {};
 
-    // Navigasi SPA dengan Base Path aman
+    // Inisialisasi link & teks berdasarkan Config
+    document.getElementById('brand-logo').setAttribute('href', basePath);
+    document.querySelectorAll('.site-title-text').forEach(el => el.innerText = config.siteName);
+    
+    const waBaseUrl = `https://wa.me/${config.defaultPhone}?text=Halo%20${encodeURIComponent(config.siteName)}`;
+    document.getElementById('header-wa-btn').setAttribute('href', `${waBaseUrl}%2C%20saya%20mau%20order`);
+    document.getElementById('wa-float-btn').setAttribute('href', waBaseUrl);
+    document.querySelectorAll('.footer-wa-link').forEach(el => el.setAttribute('href', `${waBaseUrl}%2C%20saya%20mau%20tanya%20layanan`));
+    
+    const phoneLink = document.getElementById('footer-phone-link');
+    phoneLink.setAttribute('href', `tel:+${config.defaultPhone}`);
+    phoneLink.innerText = config.defaultPhone.startsWith('62') ? '0' + config.defaultPhone.slice(2) : config.defaultPhone;
+
+    // Helper Navigasi SPA
     function navigate(e, relativeSlug) {
       if (e) e.preventDefault();
       const targetUrl = relativeSlug ? `${basePath}${relativeSlug}` : basePath;
@@ -389,16 +330,14 @@
       document.getElementById('page-desc').setAttribute('content', desc);
       document.getElementById('og-title').setAttribute('content', title);
       document.getElementById('og-desc').setAttribute('content', desc);
-      const fullUrl = window.location.origin + (relativeSlug ? `${basePath}${relativeSlug}` : basePath);
+      const fullUrl = (config.baseDomain || window.location.origin) + (relativeSlug ? `${basePath}${relativeSlug}` : basePath);
       document.getElementById('page-canonical').setAttribute('href', fullUrl);
       document.getElementById('og-url').setAttribute('content', fullUrl);
     }
 
-    // Router Parser
+    // Router
     function renderRoute() {
       let currentPath = window.location.pathname;
-      
-      // Bersihkan base path dari path yang sedang aktif
       if (currentPath.startsWith(basePath)) {
         currentPath = currentPath.slice(basePath.length);
       }
@@ -406,17 +345,14 @@
       const cleanSlug = currentPath.replace(/^\/|\/$/g, '');
       const app = document.getElementById('app');
 
-      // 1. HALAMAN UTAMA / BERANDA
       if (cleanSlug === '') {
         updateSEO(
-          "Laundry Listing – Direktori & Layanan Laundry Kiloan Express",
-          "Laundry Listing: Layanan laundry kiloan dan express terpercaya di Indonesia. Mulai Rp 7.000/kg, hasil bersih, wangi, rapi, dan antar jemput.",
+          `${config.siteName} – Direktori & Layanan Laundry Kiloan Express`,
+          `${config.siteName}: Layanan laundry kiloan dan express terpercaya di Indonesia. Mulai ${config.defaultPricePerKg}/kg, hasil bersih, wangi, rapi, dan antar jemput.`,
           ""
         );
         app.innerHTML = renderHomePage();
-      } 
-      // 2. HALAMAN KABUPATEN ATAU KECAMATAN
-      else {
+      } else {
         let matchedKab = null;
         let matchedKec = null;
 
@@ -436,15 +372,15 @@
 
         if (matchedKec && matchedKab) {
           updateSEO(
-            `Laundry Kiloan ${matchedKec.name} – Bersih & Wangi | Laundry Listing ${matchedKab.name}`,
-            `Laundry kiloan di ${matchedKec.name}, ${matchedKab.name}. Mulai Rp 7.000/kg, express 6 jam, antar jemput gratis, garansi cuci ulang.`,
+            `Laundry Kiloan ${matchedKec.name} – Bersih & Wangi | ${config.siteName} ${matchedKab.name}`,
+            `Laundry kiloan di ${matchedKec.name}, ${matchedKab.name}. Mulai ${config.defaultPricePerKg}/kg, express 6 jam, antar jemput gratis, garansi cuci ulang.`,
             matchedKec.slug
           );
           app.innerHTML = renderKecamatanPage(matchedKab, matchedKec);
         } else if (matchedKab) {
           updateSEO(
-            `Laundry Listing ${matchedKab.name} – Direktori Laundry Kiloan | Antar Jemput`,
-            `Layanan laundry kiloan terpercaya di seluruh ${matchedKab.name}. Mulai Rp 7.000/kg, express 6 jam, melayani seluruh kecamatan.`,
+            `${config.siteName} ${matchedKab.name} – Direktori Laundry Kiloan | Antar Jemput`,
+            `Layanan laundry kiloan terpercaya di seluruh ${matchedKab.name}. Mulai ${config.defaultPricePerKg}/kg, express 6 jam, melayani seluruh kecamatan.`,
             matchedKab.slug
           );
           app.innerHTML = renderKabupatenPage(matchedKab);
@@ -461,7 +397,7 @@
       initFAQ();
     }
 
-    // VIEW: 1. Home Page
+    // View: Home
     function renderHomePage() {
       const kabKeys = Object.keys(dataWilayah);
       const kabGridHtml = kabKeys.map(key => {
@@ -483,17 +419,17 @@
             <div class="hero-grid">
               <div>
                 <div class="badge badge-orange">🧼 Direktori & Layanan Laundry</div>
-                <h1 class="hero-title">Jasa Laundry Kiloan &amp; Express <span class="hl-orange">Laundry Listing</span></h1>
+                <h1 class="hero-title">Jasa Laundry Kiloan &amp; Express <span class="hl-orange">${config.siteName}</span></h1>
                 <p class="hero-sub">Layanan laundry profesional dengan standar higienis tinggi, detergen premium, pemisahan warna ketat, dan gratis antar-jemput.</p>
                 <div class="hero-cta-group">
-                  <a href="https://wa.me/${defaultPhone}?text=Halo%20Laundry%20Listing%2C%20saya%20mau%20order" target="_blank" class="btn btn-wa btn-lg">💬 Pesan Sekarang</a>
+                  <a href="https://wa.me/${config.defaultPhone}?text=Halo%20${encodeURIComponent(config.siteName)}%2C%20saya%20mau%20order" target="_blank" class="btn btn-wa btn-lg">💬 Pesan Sekarang</a>
                   <a href="#area-layanan" class="btn btn-outline">Pilih Kota / Kabupaten ↓</a>
                 </div>
               </div>
               <div>
                 <div class="hero-card-visual">
                   <div style="font-size: 3.5rem; margin-bottom: 12px;">👕✨</div>
-                  <h3 style="color:#fff; margin-bottom: 6px;">Mulai Rp 7.000 / kg</h3>
+                  <h3 style="color:#fff; margin-bottom: 6px;">Mulai ${config.defaultPricePerKg} / kg</h3>
                   <p style="color: rgba(255,255,255,.8); font-size: .9rem;">Garansi Cuci Ulang 100% Gratis</p>
                 </div>
               </div>
@@ -505,9 +441,9 @@
           <div class="container">
             <div class="stats-grid">
               <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Tahun Pengalaman</div></div>
-              <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">Kabupaten / Kota</div></div>
+              <div class="stat-item"><div class="stat-num">${kabKeys.length}+</div><div class="stat-label">Kabupaten / Kota</div></div>
               <div class="stat-item"><div class="stat-num">700+</div><div class="stat-label">Kecamatan Tercover</div></div>
-              <div class="stat-item"><div class="stat-num">Rp 7.000</div><div class="stat-label">Harga Mulai /kg</div></div>
+              <div class="stat-item"><div class="stat-num">${config.defaultPricePerKg}</div><div class="stat-label">Harga Mulai /kg</div></div>
             </div>
           </div>
         </section>
@@ -527,7 +463,7 @@
           <div class="container">
             <div class="section-head">
               <div class="badge badge-orange">🏆 Keunggulan</div>
-              <h2>Mengapa Memilih Laundry Listing?</h2>
+              <h2>Mengapa Memilih ${config.siteName}?</h2>
               <p>Standar layanan terbaik yang kami jaga di setiap kilogram pakaian Anda.</p>
             </div>
             <div class="services-grid">
@@ -539,11 +475,11 @@
         </section>
 
         ${renderFAQSection()}
-        ${renderCTASection("Cucian Menumpuk di Rumah?", "Serahkan pada Laundry Listing, beres tanpa repot. Mulai Rp 7.000/kg.")}
+        ${renderCTASection("Cucian Menumpuk di Rumah?", `Serahkan pada ${config.siteName}, beres tanpa repot. Mulai ${config.defaultPricePerKg}/kg.`)}
       `;
     }
 
-    // VIEW: 2. Kabupaten Page
+    // View: Kabupaten
     function renderKabupatenPage(kab) {
       const kecKeys = Object.keys(kab.kecamatan);
       const kecGridHtml = kecKeys.map(key => {
@@ -572,9 +508,9 @@
         <section id="hero">
           <div class="container" style="text-align: center;">
             <div class="badge badge-orange">📍 Area Kabupaten / Kota ${kab.name}</div>
-            <h1 class="hero-title" style="max-width: 750px; margin: 0 auto 16px;">Laundry Listing <span class="hl-orange">${kab.name}</span> – Antar Jemput Gratis</h1>
-            <p class="hero-sub" style="margin: 0 auto 28px;">Melayani ${kab.totalKecamatan} kecamatan di ${kab.name}. Bersih, harum, rapi, mulai Rp 7.000/kg.</p>
-            <a href="https://wa.me/${defaultPhone}?text=Halo%20Laundry%20Listing%2C%20saya%20mau%20order%20di%20${encodeURIComponent(kab.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>
+            <h1 class="hero-title" style="max-width: 750px; margin: 0 auto 16px;">${config.siteName} <span class="hl-orange">${kab.name}</span> – Antar Jemput Gratis</h1>
+            <p class="hero-sub" style="margin: 0 auto 28px;">Melayani ${kab.totalKecamatan} kecamatan di ${kab.name}. Bersih, harum, rapi, mulai ${config.defaultPricePerKg}/kg.</p>
+            <a href="https://wa.me/${config.defaultPhone}?text=Halo%20${encodeURIComponent(config.siteName)}%2C%20saya%20mau%20order%20di%20${encodeURIComponent(kab.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>
           </div>
         </section>
 
@@ -583,7 +519,7 @@
             <div class="stats-grid">
               <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Tahun Melayani</div></div>
               <div class="stat-item"><div class="stat-num">${kab.totalKecamatan}</div><div class="stat-label">Kecamatan di ${kab.name}</div></div>
-              <div class="stat-item"><div class="stat-num">Rp 7.000</div><div class="stat-label">Mulai per Kg</div></div>
+              <div class="stat-item"><div class="stat-num">${config.defaultPricePerKg}</div><div class="stat-label">Mulai per Kg</div></div>
               <div class="stat-item"><div class="stat-num">6 Jam</div><div class="stat-label">Express Tercepat</div></div>
             </div>
           </div>
@@ -605,7 +541,7 @@
       `;
     }
 
-    // VIEW: 3. Kecamatan Detail Page
+    // View: Kecamatan
     function renderKecamatanPage(kab, kec) {
       const otherKecKeys = Object.keys(kab.kecamatan).filter(k => kab.kecamatan[k].slug !== kec.slug);
       const otherKecHtml = otherKecKeys.map(k => {
@@ -634,7 +570,7 @@
                 <h1 class="hero-title">Laundry Kiloan <span class="hl-orange">${kec.name}</span> ${kab.name}</h1>
                 <p class="hero-sub">Solusi cuci pakaian cepat, wangi, dan rapi untuk warga ${kec.name}. Layanan express 6 jam dan antar jemput ke rumah Anda.</p>
                 <div class="hero-cta-group">
-                  <a href="https://wa.me/${defaultPhone}?text=Halo%2C%20saya%20mau%20laundry%20di%20${encodeURIComponent(kec.name)}%20${encodeURIComponent(kab.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>
+                  <a href="https://wa.me/${config.defaultPhone}?text=Halo%2C%20saya%20mau%20laundry%20di%20${encodeURIComponent(kec.name)}%20${encodeURIComponent(kab.name)}" target="_blank" class="btn btn-wa btn-lg">💬 Titip Cucian Sekarang</a>
                   <a href="#harga" class="btn btn-outline">Lihat Tarif ↓</a>
                 </div>
               </div>
@@ -654,7 +590,7 @@
             <div class="stats-grid">
               <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Tahun Berpengalaman</div></div>
               <div class="stat-item"><div class="stat-num">4.8 ⭐</div><div class="stat-label">Rating Kepuasan</div></div>
-              <div class="stat-item"><div class="stat-num">Rp 7.000</div><div class="stat-label">Mulai per Kg</div></div>
+              <div class="stat-item"><div class="stat-num">${config.defaultPricePerKg}</div><div class="stat-label">Mulai per Kg</div></div>
               <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Garansi Cuci Ulang</div></div>
             </div>
           </div>
@@ -664,8 +600,8 @@
         <section class="section section-alt">
           <div class="container">
             <div class="unique-intro-wrap">
-              <h2 class="unique-intro-title">Laundry Listing: Solusi Praktis untuk Warga ${kec.name}</h2>
-              <p class="unique-intro-text">Bagi Anda yang beraktivitas padat di wilayah ${kec.name} dan sekitarnya, meluangkan 3-5 jam setiap minggu untuk mencuci dan menyetrika pakaian sering kali melelahkan. Laundry Listing hadir memberikan kemudahan dengan tarif terjangkau mulai Rp 7.000/kg.</p>
+              <h2 class="unique-intro-title">${config.siteName}: Solusi Praktis untuk Warga ${kec.name}</h2>
+              <p class="unique-intro-text">Bagi Anda yang beraktivitas padat di wilayah ${kec.name} dan sekitarnya, meluangkan 3-5 jam setiap minggu untuk mencuci dan menyetrika pakaian sering kali melelahkan. ${config.siteName} hadir memberikan kemudahan dengan tarif terjangkau mulai ${config.defaultPricePerKg}/kg.</p>
               <p class="unique-intro-text">Dengan kurir antar-jemput yang siap datang ke lokasi Anda di ${kec.name}, Anda tidak perlu lagi repot mengantar pakaian kotor ke konter.</p>
             </div>
           </div>
@@ -686,41 +622,41 @@
               <div class="price-card">
                 <h3>Reguler</h3>
                 <p style="font-size: .85rem; color: var(--gray);">Selesai 2 Hari</p>
-                <div class="price-amount">Rp 7.000</div>
+                <div class="price-amount">${config.defaultPricePerKg}</div>
                 <p style="font-size: .85rem; color: var(--gray);">/ kg (Min. 3 kg)</p>
                 <ul class="price-features">
                   <li>Cuci, kering & lipat rapi</li>
                   <li>Detergen + pewangi premium</li>
                   <li>Pemisahan pakaian putih/warna</li>
                 </ul>
-                <a href="https://wa.me/${defaultPhone}?text=Order%20Reguler%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-primary" style="width:100%;">Pesan Reguler</a>
+                <a href="https://wa.me/${config.defaultPhone}?text=Order%20Reguler%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-primary" style="width:100%;">Pesan Reguler</a>
               </div>
 
               <div class="price-card featured">
                 <span class="price-badge">Paling Cepat</span>
                 <h3>Express 6 Jam</h3>
                 <p style="font-size: .85rem; color: var(--gray);">Selesai Hari yang Sama</p>
-                <div class="price-amount">Rp 12.000</div>
+                <div class="price-amount">${config.expressPricePerKg}</div>
                 <p style="font-size: .85rem; color: var(--gray);">/ kg (Min. 3 kg)</p>
                 <ul class="price-features">
                   <li>Prioritas antrean mesin utama</li>
                   <li>Selesai 6-12 jam kerja</li>
                   <li>Notifikasi WhatsApp saat siap kirim</li>
                 </ul>
-                <a href="https://wa.me/${defaultPhone}?text=Order%20Express%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-orange" style="width:100%;">Pesan Express</a>
+                <a href="https://wa.me/${config.defaultPhone}?text=Order%20Express%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-orange" style="width:100%;">Pesan Express</a>
               </div>
 
               <div class="price-card">
                 <h3>Cuci + Setrika</h3>
                 <p style="font-size: .85rem; color: var(--gray);">Selesai 2-3 Hari</p>
-                <div class="price-amount">Rp 10.000</div>
+                <div class="price-amount">${config.cuciSetrikaPricePerKg}</div>
                 <p style="font-size: .85rem; color: var(--gray);">/ kg (Min. 3 kg)</p>
                 <ul class="price-features">
                   <li>Setrika uap rapi per helai</li>
                   <li>Siap gantung / simpan di lemari</li>
                   <li>Cocok untuk kemeja & seragam kerja</li>
                 </ul>
-                <a href="https://wa.me/${defaultPhone}?text=Order%20Cuci%20Setrika%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-primary" style="width:100%;">Pesan Cuci Setrika</a>
+                <a href="https://wa.me/${config.defaultPhone}?text=Order%20Cuci%20Setrika%20di%20${encodeURIComponent(kec.name)}" target="_blank" class="btn btn-primary" style="width:100%;">Pesan Cuci Setrika</a>
               </div>
             </div>
           </div>
@@ -772,11 +708,11 @@
         </section>
 
         ${renderFAQSection()}
-        ${renderCTASection(`Cucian Menumpuk di ${kec.name}?`, `Pesan sekarang ke Laundry Listing, tim kurir kami jemput ke depan pintu Anda.`)}
+        ${renderCTASection(`Cucian Menumpuk di ${kec.name}?`, `Pesan sekarang ke ${config.siteName}, tim kurir kami jemput ke depan pintu Anda.`)}
       `;
     }
 
-    // PARTIAL REUSABLE COMPONENTS
+    // Partials
     function renderServicesSection() {
       return `
         <section class="section">
@@ -790,19 +726,19 @@
                 <div class="listing-icon">👕</div>
                 <h3>Laundry Kiloan Reguler</h3>
                 <p>Cuci bersih, kering sempurna, dan lipat rapi. Estimasi pengerjaan 2 hari kerja.</p>
-                <div class="service-price">Mulai Rp 7.000 / kg</div>
+                <div class="service-price">Mulai ${config.defaultPricePerKg} / kg</div>
               </div>
               <div class="service-card">
                 <div class="listing-icon">⚡</div>
                 <h3>Laundry Express 6 Jam</h3>
                 <p>Layanan kilat untuk kebutuhan darurat. Pakaian bersih dalam hitungan jam.</p>
-                <div class="service-price">Mulai Rp 12.000 / kg</div>
+                <div class="service-price">Mulai ${config.expressPricePerKg} / kg</div>
               </div>
               <div class="service-card">
                 <div class="listing-icon">👔</div>
                 <h3>Cuci + Setrika Uap</h3>
                 <p>Pakaian rapi bebas kusut siap pakai. Menggunakan setrika uap berstandar butik.</p>
-                <div class="service-price">Mulai Rp 10.000 / kg</div>
+                <div class="service-price">Mulai ${config.cuciSetrikaPricePerKg} / kg</div>
               </div>
               <div class="service-card">
                 <div class="listing-icon">🛏️</div>
@@ -817,6 +753,7 @@
     }
 
     function renderFAQSection() {
+      const phoneDisplay = config.defaultPhone.startsWith('62') ? '0' + config.defaultPhone.slice(2) : config.defaultPhone;
       return `
         <section class="section section-alt" id="faq">
           <div class="container">
@@ -831,7 +768,7 @@
               </div>
               <div class="faq-item">
                 <div class="faq-q"><span>Apakah ada garansi jika cucian rusak atau kurang bersih?</span><span class="faq-icon">+</span></div>
-                <div class="faq-a">Ya, kami memberikan garansi cuci ulang 100% gratis jika hasil cucian tidak harum atau kurang bersih. Cukup hubungi kami di 085773009666 maksimal 24 jam setelah pesanan diterima.</div>
+                <div class="faq-a">Ya, kami memberikan garansi cuci ulang 100% gratis jika hasil cucian tidak harum atau kurang bersih. Cukup hubungi kami di ${phoneDisplay} maksimal 24 jam setelah pesanan diterima.</div>
               </div>
               <div class="faq-item">
                 <div class="faq-q"><span>Bagaimana cara pembayaran?</span><span class="faq-icon">+</span></div>
@@ -849,7 +786,7 @@
           <div class="container">
             <h2>${title}</h2>
             <p>${desc}</p>
-            <a href="https://wa.me/${defaultPhone}?text=Halo%20Laundry%20Listing%2C%20saya%20mau%20order" target="_blank" rel="noopener" class="btn btn-wa btn-lg">
+            <a href="https://wa.me/${config.defaultPhone}?text=Halo%20${encodeURIComponent(config.siteName)}%2C%20saya%20mau%20order" target="_blank" rel="noopener" class="btn btn-wa btn-lg">
               💬 Pesan via WhatsApp Sekarang
             </a>
           </div>
