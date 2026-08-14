@@ -1,4 +1,4 @@
-const dataWilayah = {
+window.DATA_WILAYAH = {
   "bogor": {
     name: "Bogor",
     slug: "laundry-bogor",
