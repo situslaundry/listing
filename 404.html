@@ -225,7 +225,7 @@
   <header id="site-header">
     <div class="container">
       <div class="header-inner">
-        <a class="logo" href="javascript:void(0)" id="brand-logo" onclick="navigate(event, '')">
+        <a class="logo" href="/" id="brand-logo" onclick="navigate(event, '')">
           <div class="logo-icon">🧺</div> <span>Laundry Listing</span>
         </a>
         <a class="header-cta" href="" id="header-wa-btn" rel="noopener" target="_blank">
@@ -278,13 +278,13 @@
     </div>
   </footer>
 
-  <!-- SCRIPT ENGINE UNIVERSAL -->
+  <!-- SCRIPT ENGINE (404 CLEAN URL ROUTER) -->
   <script>
-    // URL Endpoint Eksternal JS Anda
+    // URL Endpoint Eksternal JS
     const EXTERNAL_CONFIG_JS = "https://cdn.jsdelivr.net/gh/situslaundry/listing@main/js/config.js";
     const EXTERNAL_DATA_WILAYAH_JS = "https://cdn.jsdelivr.net/gh/situslaundry/listing@main/js/dataWilayah.js";
 
-    // Tetapan Harga Template (Hanya nomor telepon yang diambil dari config eksternal)
+    // Tetapan Harga Template (Hanya nomor telepon yang diatur dari config eksternal)
     const PRICING = {
       defaultPricePerKg: "Rp 7.000",
       expressPricePerKg: "Rp 12.000",
@@ -299,7 +299,7 @@
         s.async = true;
         s.onload = resolve;
         s.onerror = () => {
-          console.warn("Gagal memuat eksternal: " + src + ". Menggunakan fallback bawaan.");
+          console.warn("Gagal memuat eksternal: " + src + ". Menggunakan nomor fallback.");
           resolve();
         };
         document.head.appendChild(s);
@@ -315,20 +315,23 @@
       return window.DATA_WILAYAH || {};
     }
 
-    // 3. Generator Path Aktif Universal (Cocok untuk Geocities, GitHub, Vercel, dll)
-    function getCurrentPagePath() {
-      return window.location.pathname;
-    }
-
-    function buildAreaUrl(slug) {
-      const pagePath = getCurrentPagePath();
-      return slug ? `${pagePath}?area=${encodeURIComponent(slug)}` : pagePath;
+    // 3. Base Path Auto-Detector untuk Sub-Folder Repository / Hosting Root
+    function getBasePath() {
+      const isGitHub = window.location.hostname.endsWith('github.io');
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      if (isGitHub && parts.length > 0 && parts[0] === 'listing') {
+        return '/listing/';
+      }
+      return '/';
     }
 
     function updateStaticUI() {
       const phone = getPhone();
+      const basePath = getBasePath();
+      const brandLogo = document.getElementById('brand-logo');
+      if (brandLogo) brandLogo.setAttribute('href', basePath);
+
       const waUrl = `https://wa.me/${phone}?text=Halo%20Laundry%20Listing`;
-      
       const headerWa = document.getElementById('header-wa-btn');
       if (headerWa) headerWa.setAttribute('href', `${waUrl}%2C%20saya%20mau%20order`);
       
@@ -344,10 +347,11 @@
       }
     }
 
-    // 4. Navigasi SPA Universal
-    function navigate(e, areaSlug) {
+    // 4. Navigasi SPA Clean URL (Tanpa ?area=)
+    function navigate(e, relativeSlug) {
       if (e) e.preventDefault();
-      const targetUrl = buildAreaUrl(areaSlug);
+      const basePath = getBasePath();
+      const targetUrl = relativeSlug ? `${basePath}${relativeSlug}` : basePath;
       window.history.pushState({}, '', targetUrl);
       renderRoute();
       window.scrollTo(0, 0);
@@ -355,45 +359,51 @@
 
     window.addEventListener('popstate', renderRoute);
 
-    function updateSEO(title, desc, areaSlug) {
+    function updateSEO(title, desc, relativeSlug) {
+      const basePath = getBasePath();
       document.title = title;
       const pt = document.getElementById('page-title'); if (pt) pt.innerText = title;
       const pd = document.getElementById('page-desc'); if (pd) pd.setAttribute('content', desc);
       const ot = document.getElementById('og-title'); if (ot) ot.setAttribute('content', title);
       const od = document.getElementById('og-desc'); if (od) od.setAttribute('content', desc);
-      const fullUrl = window.location.origin + buildAreaUrl(areaSlug);
+      const fullUrl = window.location.origin + (relativeSlug ? `${basePath}${relativeSlug}` : basePath);
       const pc = document.getElementById('page-canonical'); if (pc) pc.setAttribute('href', fullUrl);
       const ou = document.getElementById('og-url'); if (ou) ou.setAttribute('content', fullUrl);
     }
 
-    // 5. Router Dispatcher Berdasarkan ?area=
+    // 5. Clean URL Router Dispatcher
     function renderRoute() {
       const phone = getPhone();
       const dataWilayah = getDataWilayah();
+      const basePath = getBasePath();
       
-      const urlParams = new URLSearchParams(window.location.search);
-      const currentArea = urlParams.get('area') ? urlParams.get('area').trim() : '';
+      let currentPath = window.location.pathname;
+      if (currentPath.startsWith(basePath)) {
+        currentPath = currentPath.slice(basePath.length);
+      }
+      
+      const cleanSlug = currentPath.replace(/^\/|\/$/g, '');
       const app = document.getElementById('app');
       if (!app) return;
 
-      if (!currentArea) {
+      if (cleanSlug === '' || cleanSlug === 'index.html' || cleanSlug === '404.html') {
         updateSEO(
           "Laundry Listing – Direktori & Layanan Laundry Kiloan Express",
           `Laundry Listing: Layanan laundry kiloan dan express terpercaya di Indonesia. Mulai ${PRICING.defaultPricePerKg}/kg, hasil bersih, wangi, rapi, dan antar jemput.`,
           ""
         );
-        app.innerHTML = renderHomePage(phone, dataWilayah);
+        app.innerHTML = renderHomePage(phone, dataWilayah, basePath);
       } else {
         let matchedKab = null;
         let matchedKec = null;
 
         for (let kabKey in dataWilayah) {
-          if (dataWilayah[kabKey].slug === currentArea) {
+          if (dataWilayah[kabKey].slug === cleanSlug) {
             matchedKab = dataWilayah[kabKey];
             break;
           }
           for (let kecKey in dataWilayah[kabKey].kecamatan) {
-            if (dataWilayah[kabKey].kecamatan[kecKey].slug === currentArea) {
+            if (dataWilayah[kabKey].kecamatan[kecKey].slug === cleanSlug) {
               matchedKab = dataWilayah[kabKey];
               matchedKec = dataWilayah[kabKey].kecamatan[kecKey];
               break;
@@ -407,20 +417,20 @@
             `Laundry kiloan di ${matchedKec.name}, ${matchedKab.name}. Mulai ${PRICING.defaultPricePerKg}/kg, express 6 jam, antar jemput gratis, garansi cuci ulang.`,
             matchedKec.slug
           );
-          app.innerHTML = renderKecamatanPage(phone, matchedKab, matchedKec);
+          app.innerHTML = renderKecamatanPage(phone, matchedKab, matchedKec, basePath);
         } else if (matchedKab) {
           updateSEO(
             `Laundry Listing ${matchedKab.name} – Direktori Laundry Kiloan | Antar Jemput`,
             `Layanan laundry kiloan terpercaya di seluruh ${matchedKab.name}. Mulai ${PRICING.defaultPricePerKg}/kg, express 6 jam, melayani seluruh kecamatan.`,
             matchedKab.slug
           );
-          app.innerHTML = renderKabupatenPage(phone, matchedKab);
+          app.innerHTML = renderKabupatenPage(phone, matchedKab, basePath);
         } else {
           app.innerHTML = `
             <div class="container section" style="text-align:center; padding: 100px 24px;">
               <h2>Halaman Tidak Ditemukan</h2>
-              <p style="margin: 16px 0; color: var(--gray);">Maaf, data area yang Anda cari tidak tersedia.</p>
-              <a href="${buildAreaUrl('')}" class="btn btn-primary" onclick="navigate(event, '')">Kembali ke Beranda</a>
+              <p style="margin: 16px 0; color: var(--gray);">Maaf, area yang Anda tuju belum terdaftar.</p>
+              <a href="${basePath}" class="btn btn-primary" onclick="navigate(event, '')">Kembali ke Beranda</a>
             </div>`;
         }
       }
@@ -429,12 +439,12 @@
     }
 
     // View: Beranda
-    function renderHomePage(phone, dataWilayah) {
+    function renderHomePage(phone, dataWilayah, basePath) {
       const kabKeys = Object.keys(dataWilayah);
       const kabGridHtml = kabKeys.map(key => {
         const kab = dataWilayah[key];
         return `
-          <a href="${buildAreaUrl(kab.slug)}" class="listing-card" onclick="navigate(event, '${kab.slug}')">
+          <a href="${basePath}${kab.slug}" class="listing-card" onclick="navigate(event, '${kab.slug}')">
             <div class="listing-icon">🧺</div>
             <div>
               <div class="listing-name">Laundry ${kab.name}</div>
@@ -511,12 +521,12 @@
     }
 
     // View: Kabupaten
-    function renderKabupatenPage(phone, kab) {
+    function renderKabupatenPage(phone, kab, basePath) {
       const kecKeys = Object.keys(kab.kecamatan || {});
       const kecGridHtml = kecKeys.map(key => {
         const kec = kab.kecamatan[key];
         return `
-          <a href="${buildAreaUrl(kec.slug)}" class="listing-card" onclick="navigate(event, '${kec.slug}')">
+          <a href="${basePath}${kec.slug}" class="listing-card" onclick="navigate(event, '${kec.slug}')">
             <div class="listing-icon">📍</div>
             <div>
               <div class="listing-name">Laundry ${kec.name}</div>
@@ -530,7 +540,7 @@
         <div class="breadcrumb-wrap">
           <div class="container">
             <div class="breadcrumb">
-              <a href="${buildAreaUrl('')}" onclick="navigate(event, '')">Home</a> <span>›</span>
+              <a href="${basePath}" onclick="navigate(event, '')">Home</a> <span>›</span>
               <strong>Laundry ${kab.name}</strong>
             </div>
           </div>
@@ -573,11 +583,11 @@
     }
 
     // View: Kecamatan
-    function renderKecamatanPage(phone, kab, kec) {
+    function renderKecamatanPage(phone, kab, kec, basePath) {
       const otherKecKeys = Object.keys(kab.kecamatan || {}).filter(k => kab.kecamatan[k].slug !== kec.slug);
       const otherKecHtml = otherKecKeys.map(k => {
         const item = kab.kecamatan[k];
-        return `<li><a href="${buildAreaUrl(item.slug)}" onclick="navigate(event, '${item.slug}')">🧺 Laundry ${item.name}</a></li>`;
+        return `<li><a href="${basePath}${item.slug}" onclick="navigate(event, '${item.slug}')">🧺 Laundry ${item.name}</a></li>`;
       }).join('');
 
       const desaTagsHtml = (kec.desa || []).map(d => `<span class="desa-tag">📍 ${d}</span>`).join('');
@@ -586,8 +596,8 @@
         <div class="breadcrumb-wrap">
           <div class="container">
             <div class="breadcrumb">
-              <a href="${buildAreaUrl('')}" onclick="navigate(event, '')">Home</a> <span>›</span>
-              <a href="${buildAreaUrl(kab.slug)}" onclick="navigate(event, '${kab.slug}')">Laundry ${kab.name}</a> <span>›</span>
+              <a href="${basePath}" onclick="navigate(event, '')">Home</a> <span>›</span>
+              <a href="${basePath}${kab.slug}" onclick="navigate(event, '${kab.slug}')">Laundry ${kab.name}</a> <span>›</span>
               <strong>Kecamatan ${kec.name}</strong>
             </div>
           </div>
@@ -830,8 +840,8 @@
       });
     }
 
-    // 6. Bootloader: Memastikan eksternal JS siap sebelum render
-    async function initUniversalApp() {
+    // 6. Bootloader Async Loader
+    async function initApp() {
       await loadExternalScript(EXTERNAL_CONFIG_JS);
       await loadExternalScript(EXTERNAL_DATA_WILAYAH_JS);
       
@@ -839,7 +849,7 @@
       renderRoute();
     }
 
-    window.addEventListener('DOMContentLoaded', initUniversalApp);
+    window.addEventListener('DOMContentLoaded', initApp);
   </script>
 </body>
 </html>
